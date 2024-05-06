@@ -1,4 +1,4 @@
-export function InicioIdosos() {
+export function InicioIdoso() {
     return(
         <>
             TELA DE INICIO DOS IDOSOS
