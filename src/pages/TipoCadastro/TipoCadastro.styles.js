@@ -25,7 +25,6 @@ export const DivBtns = styled.div`
     align-items: center;
     margin-top: 6vh;
     gap: 7vw;
-    cursor: pointer;
 `
 
 export const BtnEscolha = styled.div`
@@ -38,6 +37,7 @@ export const BtnEscolha = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `
 
 export const ImgEscolha = styled.img`
