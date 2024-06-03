@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import { Login } from "../pages/Login/Login";
-import { TipoUsuario } from "../pages/TipoUsuario/TipoUsuario";
+import { TipoCadastro } from "../pages/TipoCadastro/TipoCadastro";
 import { CadastroResponsavel } from "../pages/CadastroResponsavel/CadastroResponsavel";
 import { CadastroIdoso } from "../pages/CadastroIdoso/CadastroIdoso";
 import { CadastroRealizado } from "../pages/CadastroRealizado/CadastroRealizado";
@@ -20,7 +20,7 @@ export function Router() {
     return(
         <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/escolhaUsuario" element={<TipoUsuario />} />
+            <Route path="/escolhaCadastro" element={<TipoCadastro />} />
             <Route path="/cadastroResponsavel" element={<CadastroResponsavel />} />
             <Route path="/cadastroIdoso" element={<CadastroIdoso />} />
             <Route path="/inicioIdoso" element={<InicioIdoso />} />

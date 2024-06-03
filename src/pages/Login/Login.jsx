@@ -4,9 +4,11 @@ import logoCompleta from '../../assets/img/logo_completa.png';
 import eyeIcon from '../../assets/svg/eye.svg';
 import eyeClosedIcon from '../../assets/svg/eye_closed.svg';
 import mailIcon from '../../assets/svg/mail.svg';
+import { useNavigate } from 'react-router';
 
 export function Login() {
     const [visible, setVisible] = useState(false);
+    const navigate = useNavigate();
 
     return(
         <S.MainStyled>
@@ -29,7 +31,11 @@ export function Login() {
                     </S.DivInput>
                     <S.PEsqueciSenha>Esqueceu a senha?</S.PEsqueciSenha>
                     <S.BtnEntrar>Entrar</S.BtnEntrar>
-                    <S.PCriarConta>Não tem uma conta? <span style={{color: '#0077B6', cursor: 'pointer'}}>Registre-se</span></S.PCriarConta>
+                    <S.PCriarConta>Não tem uma conta? 
+                        <span onClick={() => navigate('/escolhaCadastro')} style={{color: '#0077B6', cursor: 'pointer'}}>
+                            Registre-se
+                        </span>
+                    </S.PCriarConta>
                 </form>
             </S.BoxLogin>
         </S.MainStyled>
