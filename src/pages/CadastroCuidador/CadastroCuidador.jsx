@@ -3,8 +3,18 @@ import logoCompleta from '../../assets/img/logo_completa.png';
 import eyeIcon from '../../assets/svg/eye.svg';
 import eyeClosedIcon from '../../assets/svg/eye_closed.svg';
 import { useState } from 'react';
+// import { CircularProgress } from '@mui/material';
 
 export function CadastroCuidador() {
+    // const { onSubmit, errors, register, control, isLoading, responseError } =
+    // useCreateAccountForm()
+
+    // const SignInButtonLabel = isLoading ? (
+    //     <CircularProgress size="1.5rem" color="inherit" />
+    // ) : (
+    //     'Criar Conta'
+    // )
+
     const [visible, setVisible] = useState(false);
 
     return(
