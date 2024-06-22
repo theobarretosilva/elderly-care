@@ -144,4 +144,5 @@ export const BtnCadastrar = styled.button`
     border: none;
     border-radius: 8px;
     margin-top: 12vh;
+    cursor: pointer;
 `
