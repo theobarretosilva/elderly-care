@@ -1,4 +1,4 @@
-import { isCPF, isDate, isPhone } from 'brazilian-values'
+import { isCEP, isCPF, isDate, isPhone } from 'brazilian-values'
 import * as yup from 'yup'
 
 const errorMessages = {
@@ -7,7 +7,8 @@ const errorMessages = {
     cpf: 'CPF inválido. O CPF precisa seguir o formato: "000.000.000-00"',
     telefone: 'Telefone inválido. O telefone precisa seguir o formato: "(24) 98138-0000"',
     dataNascimento: 'Data inválida. A data de nascimento precisa seguir o formato: "DD/MM/AAAA"',
-    passwordLength: 'A senha precisa ter, no mínimo, 8 caracteres'
+    passwordLength: 'A senha precisa ter, no mínimo, 8 caracteres',
+    cep: 'CEP inválido. O CEP precisa seguir o formato: "00.000-000"'
 }
 
 export const validators = {
@@ -41,5 +42,11 @@ export const validators = {
     .required(errorMessages.required)
     .test('is-valid-date', errorMessages.dataNascimento, (value) => {
         return isDate(value)
+    }),
+    cep: yup
+    .string()
+    .required(errorMessages.required)
+    .test('is-valid-cep', errorMessages.cep, (value) => {
+        return isCEP(value)
     })
 }
