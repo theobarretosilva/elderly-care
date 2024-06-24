@@ -102,7 +102,7 @@ export const IconStyled = styled.img`
 export const BoxForm2 = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     background-color: white;
-    padding: 4vh 1.5vw 4vh 1.5vw;
+    padding: 1.5vh 1.5vw 1.5vh 1.5vw;
     width: 55vw;
     height: 85vh;
     border-radius: 10px;
@@ -112,7 +112,7 @@ export const TxtSobreVoce = styled.p`
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 10vh;
+    /* margin-bottom: 10vh; */
 `
 
 export const SelectStyled = styled.select`
@@ -130,19 +130,35 @@ export const TextAreaStyled = styled.textarea`
     border: 1px solid black;
     border-radius: 5px;
     padding: 0.7vh 0.5vw 0.7vh 0.5vw;
-    margin-top: 3vh;
+    margin-top: 2vh;
 `
 
 export const BtnCadastrar = styled.button`
     background-color: #0077B6;
-    height: 5.2vh;
+    height: 4.3vh;
     width: 30%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     color: white;
     font-weight: 600;
     border: none;
     border-radius: 8px;
-    margin-top: 12vh;
+    margin-top: 0;
     cursor: pointer;
+`
+
+export const DivFormEndereco = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+`
+
+export const Linha = styled.div`
+    width: 100%;
+    height: 1px;
+    background: black;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
 `
