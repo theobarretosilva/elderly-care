@@ -13,9 +13,9 @@ export const useCreateAccountCuidador = () => {
         cpf: '',
         email: '',
         dataNascimento: '',
-        endereco: {
+        address: {
             cep: '',
-            rua: '',
+            street: '',
             numero: '',
             bairro: '',
             cidade: '',
@@ -47,6 +47,7 @@ export const useCreateAccountCuidador = () => {
     const cadastrarCuidadorMutation = useMutation({
         mutationFn: (data) => {
             setResponseError('')
+            console.log(data)
             const createAccountPromise = axiosInstance.post('/caregiver/signup', data)
             toast.promise(createAccountPromise, {
               loading: 'Processando...',

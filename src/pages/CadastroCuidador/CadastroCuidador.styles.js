@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MainStyled = styled.main`
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     padding: 5vh 5vw 5vh 5vw;
 `
@@ -15,6 +15,9 @@ export const DivVoltar = styled.div`
     justify-content: space-between;
     gap: 0.4vw;
     cursor: pointer;
+    position: fixed;
+    margin-top: 5vh;
+    margin-left: 2vw;
 `
 
 export const ImgSeta = styled.img`
@@ -33,7 +36,7 @@ export const DivLogoForm = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 5vw;
+    gap: 4vw;
 `
 
 export const DivLogoForm1 = styled.div`
@@ -136,14 +139,14 @@ export const TextAreaStyled = styled.textarea`
 export const BtnCadastrar = styled.button`
     background-color: #0077B6;
     height: 4.3vh;
-    width: 30%;
+    width: 100%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-size: 1.2rem;
     color: white;
     font-weight: 600;
     border: none;
     border-radius: 8px;
-    margin-top: 0;
+    margin-top: 0.2vh;
     cursor: pointer;
 `
 
@@ -159,6 +162,6 @@ export const Linha = styled.div`
     width: 100%;
     height: 1px;
     background: black;
-    margin-top: 3vh;
-    margin-bottom: 1vh;
+    margin-top: 2vh;
+    margin-bottom: 0.8vh;
 `
