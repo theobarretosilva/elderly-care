@@ -53,7 +53,7 @@ export const useCreateAccountResponsavel = () => {
             return createAccountPromise
         },
         onSuccess: () => {
-            setTimeout(() => navigate('/patients/signin'), 3 * 1000)
+            setTimeout(() => navigate('/cadastroIdoso'), 3 * 1000)
         },
         onError: (error) => {
             const errorMessage = error.response?.data.message
@@ -83,11 +83,11 @@ export const useCreateAccountResponsavel = () => {
     const onSubmit = handleSubmit(handleCadastroForm)
     
     return {
-    isLoading: cadastrarResponsavelMutation.isLoading,
-    onSubmit,
-    control,
-    register,
-    errors,
-    responseError,
+        isLoading: cadastrarResponsavelMutation.isLoading,
+        onSubmit,
+        control,
+        register,
+        errors,
+        responseError,
     }
 }

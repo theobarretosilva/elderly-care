@@ -104,10 +104,10 @@ export const IconStyled = styled.img`
 
 export const BtnCadastrar = styled.button`
     background-color: #0077B6;
-    height: 5vh;
+    height: 4.3vh;
     width: 100%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
     font-weight: 600;
     border: none;
