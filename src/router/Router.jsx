@@ -11,26 +11,38 @@ import { EditarDadosIdoso } from "../pages/EditarDadosIdoso/EditarDadosIdoso";
 import { CadastroCuidador } from "../pages/CadastroCuidador/CadastroCuidador";
 import { InicioCuidador } from "../pages/InicioCuidador/InicioCuidador";
 import { PerfilCuidador } from "../pages/PerfilCuidador/PerfilCuidador";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 
 export function Router() {
-    const escolhaEdicao = "Idoso" || "Responsavel" || "Cuidador";
-    const pathEditarDados = "/editarDados" + escolhaEdicao;
-    console.log(pathEditarDados);
+    const { user } = useContext(UserContext);
 
-    return(
+    const pathEditarDados = user ? `/editarDados${user}` : "/editarDados";
+
+    return (
         <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/escolhaCadastro" element={<TipoCadastro />} />
             <Route path="/cadastroResponsavel" element={<CadastroResponsavel />} />
             <Route path="/cadastroIdoso" element={<CadastroIdoso />} />
-            <Route path="/inicioIdoso" element={<InicioIdoso />} />
-            <Route path="/descricaoCuidador" element={<DescricaoCuidadorIdoso />} />
-            <Route path="/perfilIdosoECuidador" element={<PerfilIdoso />} />
             <Route path="/cadastroCuidador" element={<CadastroCuidador />} />
-            <Route path="/inicioCuidador" element={<InicioCuidador />} />
-            <Route path="/perfilCuidador" element={<PerfilCuidador />} />
-            <Route path={pathEditarDados} element={<EditarDadosIdoso />} />
             <Route path="/cadastroRealizado" element={<CadastroRealizado />} />
+            <Route path={pathEditarDados} element={<EditarDadosIdoso />} />
+
+            {user === "Idoso" && (
+                <>
+                    <Route path="/inicioIdoso" element={<InicioIdoso />} />
+                    <Route path="/perfilIdosoEResponsavel" element={<PerfilIdoso />} />
+                    <Route path="/descricaoCuidador" element={<DescricaoCuidadorIdoso />} />
+                </>
+            )}
+
+            {user === "Cuidador" && (
+                <>
+                    <Route path="/inicioCuidador" element={<InicioCuidador />} />
+                    <Route path="/perfilCuidador" element={<PerfilCuidador />} />
+                </>
+            )}
         </Routes>
-    )
+    );
 }
