@@ -1,24 +1,39 @@
-import * as S from './TipoCadastro.styles'
+import * as S from './TipoCadastro.styles';
 import logoCompleta from '../../assets/img/logo_completa.png';
+import ingressoIdoso from '../../assets/img/ingresso_idoso.png';
+import ingressoCuidador from '../../assets/img/ingresso_cuidador.png';
 import { useNavigate } from 'react-router';
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export function TipoCadastro() {
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    return(
+    const escolhaIdoso = () => {
+        setUser("Idoso");
+        navigate('/cadastroResponsavel');
+    };
+
+    const escolhaCuidador = () => {
+        setUser("Cuidador");
+        navigate('/cadastroCuidador');
+    };
+
+    return (
         <S.MainStyled>
             <S.LogoStyled src={logoCompleta} />
             <S.TxtIngresso>Escolha uma forma de ingressar como usuário</S.TxtIngresso>
             <S.DivBtns>
-                <S.BtnEscolha onClick={() => navigate('/cadastroIdoso')}>
-                    <S.ImgEscolha src='../../src/assets/img/ingresso_idoso.png' />
+                <S.BtnEscolha onClick={escolhaIdoso}>
+                    <S.ImgEscolha src={ingressoIdoso} />
                     <S.TxtEscolha>Idoso(a)</S.TxtEscolha>
                 </S.BtnEscolha>
-                <S.BtnEscolha onClick={() => navigate('/cadastroCuidador')}>
-                    <S.ImgEscolha src='../../src/assets/img/ingresso_cuidador.png' />
+                <S.BtnEscolha onClick={escolhaCuidador}>
+                    <S.ImgEscolha src={ingressoCuidador} />
                     <S.TxtEscolha>Cuidador(a)</S.TxtEscolha>
                 </S.BtnEscolha>
             </S.DivBtns>
         </S.MainStyled>
-    )
+    );
 }
