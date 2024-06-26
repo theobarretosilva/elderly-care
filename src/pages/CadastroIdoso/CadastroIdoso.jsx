@@ -125,12 +125,12 @@ export function CadastroIdoso() {
                                 placeholder='Quais tipos de cuidados você procura?'
                                 {...register('tipoCuidados')}
                             />
-                            {errors.casosTrabalho && <ErrorText>{errors.casosTrabalho.message}</ErrorText>}
+                            {errors.tipoCuidados && <ErrorText>{errors.tipoCuidados.message}</ErrorText>}
                             <S.TextAreaStyled
                                 placeholder='Qual o histórico clínico do idoso?'
                                 {...register('historicoIdoso ')}
                             />
-                            {errors.casosTrabalho && <ErrorText>{errors.casosTrabalho.message}</ErrorText>}
+                            {errors.historicoIdoso && <ErrorText>{errors.historicoIdoso.message}</ErrorText>}
                             <S.BtnCadastrar>{SignInButtonLabel}</S.BtnCadastrar>
                             {!!responseError && <ErrorText>{responseError}</ErrorText>}
                         </S.BoxForm2>

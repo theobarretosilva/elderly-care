@@ -29,6 +29,8 @@ export function Router() {
             <Route path="/cadastroRealizado" element={<CadastroRealizado />} />
             <Route path={pathEditarDados} element={<EditarDadosIdoso />} />
 
+            <Route path="/login" element={user === "Idoso" ? <InicioIdoso /> : <InicioCuidador />} />
+
             {user === "Idoso" && (
                 <>
                     <Route path="/inicioIdoso" element={<InicioIdoso />} />

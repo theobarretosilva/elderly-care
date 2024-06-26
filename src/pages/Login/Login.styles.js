@@ -15,7 +15,7 @@ export const LogoStyled = styled.img`
 export const BoxLogin = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     background-color: white;
-    padding: 4vh 1.5vw 4vh 1.5vw;
+    padding: 2vh 1.5vw 2vh 1.5vw;
     width: 28vw;
     height: 50vh;
     border-radius: 10px;
@@ -37,7 +37,7 @@ export const DivStyled = styled.div`
 export const PInsInf = styled.p`
     font-weight: 500;
     font-size: 1.1vw;
-    margin-top: 5vh;
+    margin-top: 2vh;
     margin-bottom: 1.4vh;
 `
 
@@ -75,6 +75,8 @@ export const PEsqueciSenha = styled.p`
     margin-top: 0.1vh;
 `
 
+
+
 export const BtnEntrar = styled.button`
     background-color: #0077B6;
     height: 4.3vh;
@@ -85,7 +87,7 @@ export const BtnEntrar = styled.button`
     font-weight: 600;
     border: none;
     border-radius: 8px;
-    margin-top: 4.9vh;
+    margin-top: 2vh;
     margin-bottom: 0.5vh;
     cursor: pointer;
 `
