@@ -18,11 +18,11 @@ export function Login() {
                 <form>
                     <S.PInsInf>Insira suas informações</S.PInsInf>
                     <S.DivInput>
-                        <S.InputStyled type='text' />
+                        <S.InputStyled type='text' placeholder='E-mail' />
                         <S.IconStyled src={mailIcon} />
                     </S.DivInput>
                     <S.DivInput>
-                        <S.InputStyled type={visible ? 'text' : 'password'} />
+                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha'/>
                         <S.IconStyled 
                             src={visible ? eyeClosedIcon : eyeIcon} 
                             style={{cursor: 'pointer'}} 
@@ -33,7 +33,7 @@ export function Login() {
                     <S.BtnEntrar>Entrar</S.BtnEntrar>
                     <S.PCriarConta>Não tem uma conta? 
                         <span onClick={() => navigate('/escolhaCadastro')} style={{color: '#0077B6', cursor: 'pointer'}}>
-                            Registre-se
+                            ‎ Registre-se
                         </span>
                     </S.PCriarConta>
                 </form>

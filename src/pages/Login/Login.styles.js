@@ -17,7 +17,7 @@ export const BoxLogin = styled.div`
     background-color: white;
     padding: 4vh 1.5vw 4vh 1.5vw;
     width: 28vw;
-    height: 55vh;
+    height: 50vh;
     border-radius: 10px;
 `
 
@@ -37,7 +37,7 @@ export const DivStyled = styled.div`
 export const PInsInf = styled.p`
     font-weight: 500;
     font-size: 1.1vw;
-    margin-top: 6vh;
+    margin-top: 5vh;
     margin-bottom: 1.4vh;
 `
 
@@ -72,19 +72,22 @@ export const PEsqueciSenha = styled.p`
     font-weight: 400;
     text-align: end;
     cursor: pointer;
+    margin-top: 0.1vh;
 `
 
 export const BtnEntrar = styled.button`
     background-color: #0077B6;
-    height: 5.2vh;
-    width: 70%;
+    height: 4.3vh;
+    width: 100%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     color: white;
     font-weight: 600;
     border: none;
     border-radius: 8px;
-    margin-top: 7vh;
+    margin-top: 4.9vh;
+    margin-bottom: 0.5vh;
+    cursor: pointer;
 `
 
 export const PCriarConta = styled.p`

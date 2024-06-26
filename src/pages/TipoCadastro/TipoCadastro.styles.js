@@ -51,3 +51,27 @@ export const TxtEscolha = styled.p`
     font-size: 1.5rem;
     text-align: center;
 `
+
+export const DivVoltar = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4vw;
+    cursor: pointer;
+    position: fixed;
+    margin-top: 5vh;
+    margin-left: 2vw;
+`
+
+export const ImgSeta = styled.img`
+    width: 2vw;
+    height: 4vh;
+`
+
+export const TxtVoltar = styled.p`
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.35rem;
+    color: #CFCFCF;
+`
