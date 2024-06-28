@@ -41,7 +41,7 @@ export function CadastroResponsavel() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Nome completo'
-                                        {...register('nomeCompleto')}
+                                        {...register('name')}
                                     />
                                     {errors.nomeCompleto && <ErrorText>{errors.nomeCompleto.message}</ErrorText>}
                                 </S.DivInput>
@@ -57,7 +57,7 @@ export function CadastroResponsavel() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Endereço'
-                                        {...register('endereco')}
+                                        {...register('address')}
                                     />
                                     {errors.endereco && <ErrorText>{errors.endereco.message}</ErrorText>}
                                 </S.DivInput>
@@ -65,7 +65,7 @@ export function CadastroResponsavel() {
                                     <S.InputStyled
                                         type='tel'
                                         placeholder='Telefone'
-                                        {...register('telefone')}
+                                        {...register('phone')}
                                     />
                                     {errors.telefone && <ErrorText>{errors.telefone.message}</ErrorText>}
                                 </S.DivInput>
@@ -73,7 +73,7 @@ export function CadastroResponsavel() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Parentesco'
-                                        {...register('parentesco')}
+                                        {...register('kinship')}
                                     />
                                     {errors.parentesco && <ErrorText>{errors.parentesco.message}</ErrorText>}
                                 </S.DivInput>
@@ -89,7 +89,7 @@ export function CadastroResponsavel() {
                                     <S.InputStyled
                                         type={visible ? 'text' : 'password'}
                                         placeholder='Senha'
-                                        {...register('senha')}
+                                        {...register('password')}
                                     />
                                     <S.IconStyled
                                         src={visible ? eyeClosedIcon : eyeIcon}
@@ -98,7 +98,6 @@ export function CadastroResponsavel() {
                                     />
                                     {errors.senha && <ErrorText>{errors.senha.message}</ErrorText>}
                                 </S.DivInput>
-                                
                                 {!!responseError && <ErrorText>{responseError}</ErrorText>}
                             </form>
                         </S.BoxForm>
@@ -108,7 +107,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='url'
                                 placeholder='Link foto de perfil'
-                                {...register('linkFoto')}
+                                {...register('photoLink')}
                             />
                             {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
                         </S.DivInput>
@@ -125,7 +124,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='text'
                                 placeholder='Rua'
-                                {...register('endereco.rua')}
+                                {...register('endereco.street')}
                             />
                             {errors.rua && <ErrorText>{errors.rua.message}</ErrorText>}
                         </S.DivInput>
@@ -133,7 +132,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='number'
                                 placeholder='Número'
-                                {...register('endereco.numero')}
+                                {...register('endereco.number')}
                             />
                             {errors.numero && <ErrorText>{errors.numero.message}</ErrorText>}
                         </S.DivInput>
@@ -141,7 +140,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='text'
                                 placeholder='Bairro'
-                                {...register('endereco.bairro')}
+                                {...register('endereco.district')}
                             />
                             {errors.bairro && <ErrorText>{errors.bairro.message}</ErrorText>}
                         </S.DivInput>
@@ -149,7 +148,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='text'
                                 placeholder='Cidade'
-                                {...register('endereco.cidade')}
+                                {...register('endereco.city')}
                             />
                             {errors.cidade && <ErrorText>{errors.cidade.message}</ErrorText>}
                         </S.DivInput>
@@ -157,7 +156,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='text'
                                 placeholder='Estado'
-                                {...register('endereco.estado')}
+                                {...register('endereco.state')}
                             />
                             {errors.estado && <ErrorText>{errors.estado.message}</ErrorText>}
                         </S.DivInput>
@@ -165,7 +164,7 @@ export function CadastroResponsavel() {
                             <S.InputStyled
                                 type='text'
                                 placeholder='Complemento'
-                                {...register('endereco.complemento')}
+                                {...register('endereco.complement')}
                             />
                             {errors.complemento && <ErrorText>{errors.complemento.message}</ErrorText>}
                         </S.DivInput>

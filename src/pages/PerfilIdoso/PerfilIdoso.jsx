@@ -1,7 +1,14 @@
+import * as S from './PerfilIdoso.styles'
+
 export function PerfilIdoso() {
     return(
-        <>
-            TELA DE PERFIL DO IDOSO E CUIDADOR (VISÃO IDOSO)
-        </>
+        <S.MainStyled>
+            <S.BoxFundo>
+
+            </S.BoxFundo>
+            <S.BoxFundo>
+                
+            </S.BoxFundo>
+        </S.MainStyled>
     )
 }

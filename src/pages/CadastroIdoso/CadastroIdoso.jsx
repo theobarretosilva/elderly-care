@@ -37,7 +37,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Nome completo'
-                                            {...register('nomeCompleto')}
+                                            {...register('name')}
                                         />
                                         {errors.nomeCompleto && <ErrorText>{errors.nomeCompleto.message}</ErrorText>}
                                     </S.DivInput>
@@ -53,7 +53,7 @@ export function CadastroIdoso() {
                                     <S.DivInput>
                                         <ReactInputMask
                                             mask="99/99/9999"
-                                            {...register('dataNascimento')}
+                                            {...register('date_birth')}
                                         >
                                             {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="Data de nascimento" />}
                                         </ReactInputMask>
@@ -63,14 +63,14 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='url'
                                             placeholder='Link foto de perfil'
-                                            {...register('linkFoto')}
+                                            {...register('photoLink')}
                                         />
                                         {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
                                     </S.DivInput>
                                     <S.DivInput style={{width: '48%'}}>
                                         <ReactInputMask
                                             mask="99999-999"
-                                            {...register('endereco.cep')}
+                                            {...register('address.cep')}
                                         >
                                             {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CEP" />}
                                         </ReactInputMask>
@@ -80,7 +80,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Rua'
-                                            {...register('endereco.rua')}
+                                            {...register('address.street')}
                                         />
                                         {errors.rua && <ErrorText>{errors.rua.message}</ErrorText>}
                                     </S.DivInput>
@@ -88,7 +88,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='number'
                                             placeholder='Número'
-                                            {...register('endereco.numero')}
+                                            {...register('address.number')}
                                         />
                                         {errors.numero && <ErrorText>{errors.numero.message}</ErrorText>}
                                     </S.DivInput>
@@ -96,7 +96,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Bairro'
-                                            {...register('endereco.bairro')}
+                                            {...register('address.distric')}
                                         />
                                         {errors.bairro && <ErrorText>{errors.bairro.message}</ErrorText>}
                                     </S.DivInput>
@@ -104,7 +104,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Cidade'
-                                            {...register('endereco.cidade')}
+                                            {...register('address.city')}
                                         />
                                         {errors.cidade && <ErrorText>{errors.cidade.message}</ErrorText>}
                                     </S.DivInput>
@@ -112,7 +112,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Estado'
-                                            {...register('endereco.estado')}
+                                            {...register('address.state')}
                                         />
                                         {errors.estado && <ErrorText>{errors.estado.message}</ErrorText>}
                                     </S.DivInput>
@@ -120,7 +120,7 @@ export function CadastroIdoso() {
                                         <S.InputStyled
                                             type='text'
                                             placeholder='Complemento'
-                                            {...register('endereco.complemento')}
+                                            {...register('address.complement')}
                                         />
                                         {errors.complemento && <ErrorText>{errors.complemento.message}</ErrorText>}
                                     </S.DivInput>
@@ -131,12 +131,12 @@ export function CadastroIdoso() {
                             <S.TxtSobreVoce>Nos conte sobre suas necessidades...</S.TxtSobreVoce>
                             <S.TextAreaStyled
                                 placeholder='Quais tipos de cuidados você procura?'
-                                {...register('tipoCuidados')}
+                                {...register('ministration')}
                             />
                             {errors.tipoCuidados && <ErrorText>{errors.tipoCuidados.message}</ErrorText>}
                             <S.TextAreaStyled
                                 placeholder='Qual o histórico clínico do idoso?'
-                                {...register('historicoIdoso ')}
+                                {...register('historic')}
                             />
                             {errors.historicoIdoso && <ErrorText>{errors.historicoIdoso.message}</ErrorText>}
                             <S.BtnCadastrar>{SignInButtonLabel}</S.BtnCadastrar>

@@ -41,7 +41,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Nome completo'
-                                        {...register('nomeCompleto')}
+                                        {...register('name')}
                                     />
                                     {errors.nomeCompleto && <ErrorText>{errors.nomeCompleto.message}</ErrorText>}
                                 </S.DivInput>
@@ -57,7 +57,7 @@ export function CadastroCuidador() {
                                 <S.DivInput>
                                     <ReactInputMask
                                         mask="(99) 99999-9999"
-                                        {...register('telefone')}
+                                        {...register('phone')}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="tel" placeholder="Telefone" />}
                                     </ReactInputMask>
@@ -66,7 +66,7 @@ export function CadastroCuidador() {
                                 <S.DivInput>
                                     <ReactInputMask
                                         mask="99/99/9999"
-                                        {...register('dataNascimento')}
+                                        {...register('date_birth')}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="Data de nascimento" />}
                                     </ReactInputMask>
@@ -84,7 +84,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type={visible ? 'text' : 'password'}
                                         placeholder='Senha'
-                                        {...register('senha')}
+                                        {...register('password')}
                                     />
                                     <S.IconStyled
                                         src={visible ? eyeClosedIcon : eyeIcon}
@@ -97,7 +97,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='url'
                                         placeholder='Link foto de perfil'
-                                        {...register('linkFoto')}
+                                        {...register('photoLink')}
                                     />
                                     {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
                                 </S.DivInput>
@@ -108,7 +108,7 @@ export function CadastroCuidador() {
                                 <S.DivInput style={{width: '48%'}}>
                                     <ReactInputMask
                                         mask="99999-999"
-                                        {...register('.cep')}
+                                        {...register('address.cep')}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CEP" />}
                                     </ReactInputMask>
@@ -118,7 +118,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Rua'
-                                        {...register('.rua')}
+                                        {...register('address.street')}
                                     />
                                     {errors.rua && <ErrorText>{errors.rua.message}</ErrorText>}
                                 </S.DivInput>
@@ -126,7 +126,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='number'
                                         placeholder='Número'
-                                        {...register('.numero')}
+                                        {...register('address.number')}
                                     />
                                     {errors.numero && <ErrorText>{errors.numero.message}</ErrorText>}
                                 </S.DivInput>
@@ -134,7 +134,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Bairro'
-                                        {...register('.bairro')}
+                                        {...register('address.distric')}
                                     />
                                     {errors.bairro && <ErrorText>{errors.bairro.message}</ErrorText>}
                                 </S.DivInput>
@@ -142,7 +142,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Cidade'
-                                        {...register('.cidade')}
+                                        {...register('address.city')}
                                     />
                                     {errors.cidade && <ErrorText>{errors.cidade.message}</ErrorText>}
                                 </S.DivInput>
@@ -150,7 +150,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Estado'
-                                        {...register('.estado')}
+                                        {...register('address.state')}
                                     />
                                     {errors.estado && <ErrorText>{errors.estado.message}</ErrorText>}
                                 </S.DivInput>
@@ -158,7 +158,7 @@ export function CadastroCuidador() {
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Complemento'
-                                        {...register('.complemento')}
+                                        {...register('address.complement')}
                                     />
                                     {errors.complemento && <ErrorText>{errors.complemento.message}</ErrorText>}
                                 </S.DivInput>
@@ -167,7 +167,7 @@ export function CadastroCuidador() {
                             <S.TxtSobreVoce>Nos conte um pouco sobre você</S.TxtSobreVoce>
                             <S.DivFormEndereco>
                                 <S.DivInput  style={{width: '48%'}}>
-                                    <S.SelectStyled {...register('tempoExperiencia')}>
+                                    <S.SelectStyled {...register('experience')}>
                                         <option value="" disabled>Tempo de experiência na área</option>
                                         <option value="0-1 anos">0 - 1 anos</option>
                                         <option value="1-2 anos">1 - 2 anos</option>
@@ -178,7 +178,7 @@ export function CadastroCuidador() {
                                     {errors.tempoExperiencia && <ErrorText>{errors.tempoExperiencia.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput  style={{width: '48%'}}>
-                                    <S.SelectStyled {...register('tempoFormacao')}>
+                                    <S.SelectStyled {...register('training_time')}>
                                         <option value="" disabled>Formado(a) a quanto tempo?</option>
                                         <option value="0-1 anos">0 - 1 anos</option>
                                         <option value="1-2 anos">1 - 2 anos</option>
@@ -189,7 +189,7 @@ export function CadastroCuidador() {
                                     {errors.tempoFormacao && <ErrorText>{errors.tempoFormacao.message}</ErrorText>}
                                 </S.DivInput>
                             </S.DivFormEndereco>
-                            <S.TextAreaStyled placeholder='Descreva casos em que você trabalhou...' {...register('casosTrabalho')} />
+                            <S.TextAreaStyled placeholder='Descreva casos em que você trabalhou...' {...register('description_experience')} />
                             {errors.casosTrabalho && <ErrorText>{errors.casosTrabalho.message}</ErrorText>}
                             <S.BtnCadastrar>{SignInButtonLabel}</S.BtnCadastrar>
                             {!!responseError && <ErrorText>{responseError}</ErrorText>}
