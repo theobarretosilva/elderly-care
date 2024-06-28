@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as S from './Login.styles';
 import logoCompleta from '../../assets/img/logo_completa.png';
 import eyeIcon from '../../assets/svg/eye.svg';
@@ -8,10 +8,12 @@ import { useNavigate } from 'react-router';
 import { CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useLogin } from '../../hooks/useLogin';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
+import { UserContext } from '../../context/UserContext';
 
 export function Login() {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
 
     const [value, setValue] = useState('patients');
 
@@ -58,8 +60,8 @@ export function Login() {
                             value={value}
                             onChange={handleChange}
                         >
-                            <FormControlLabel value="patients" control={<Radio />} label="Responsável" />
-                            <FormControlLabel value="caregiver" control={<Radio />} label="Cuidador" />
+                            <FormControlLabel onClick={setUser('Idoso')} value="patients" control={<Radio />} label="Responsável" />
+                            <FormControlLabel onClick={setUser('Cuidador')} value="caregiver" control={<Radio />} label="Cuidador" />
                         </RadioGroup>
                     </FormControl>
                     <S.BtnEntrar>{LoginButtonLabel}</S.BtnEntrar>
