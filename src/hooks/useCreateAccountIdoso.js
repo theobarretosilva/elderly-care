@@ -12,6 +12,7 @@ export const useCreateAccountIdoso = () => {
         nomeCompleto: '',
         cpf: '',
         dataNascimento: '',
+        linkFoto: '',
         endereco: {
             cep: '',
             rua: '',

@@ -59,6 +59,14 @@ export function CadastroIdoso() {
                                         </ReactInputMask>
                                         {errors.dataNascimento && <ErrorText>{errors.dataNascimento.message}</ErrorText>}
                                     </S.DivInput>
+                                    <S.DivInput>
+                                        <S.InputStyled
+                                            type='url'
+                                            placeholder='Link foto de perfil'
+                                            {...register('linkFoto')}
+                                        />
+                                        {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
+                                    </S.DivInput>
                                     <S.DivInput style={{width: '48%'}}>
                                         <ReactInputMask
                                             mask="99999-999"

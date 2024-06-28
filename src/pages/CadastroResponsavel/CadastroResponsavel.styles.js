@@ -55,7 +55,7 @@ export const LogoStyled = styled.img`
 export const BoxForm = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     background-color: white;
-    padding: 4vh 1.1vw 4vh 1.1vw;
+    padding: 2vh 1.1vw 2vh 1.1vw;
     width: 30vw;
     height: 65vh;
     border-radius: 10px;

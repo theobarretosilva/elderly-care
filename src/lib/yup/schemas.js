@@ -22,6 +22,7 @@ export const schemas = {
         }),
         telefone: validators.telefone,
         senha: validators.password,
+        linkFoto: validators.requiredString,
         tempoExperiencia: validators.requiredString,
         casosTrabalho: validators.requiredString,
         tempoFormacao: validators.requiredString,
@@ -29,6 +30,7 @@ export const schemas = {
     responsavelForm: yup.object().shape({
         nomeCompleto: validators.requiredString,
         cpf: validators.cpf,
+        linkFoto: validators.requiredString,
         endereco: yup.object().shape({
             cep: validators.cep,
             rua: validators.requiredString,
@@ -47,6 +49,7 @@ export const schemas = {
         nomeCompleto: validators.requiredString,
         cpf: validators.cpf,
         dataNascimento: validators.dataNascimento,
+        linkFoto: validators.requiredString,
         endereco: yup.object().shape({
             cep: validators.cep,
             rua: validators.requiredString,

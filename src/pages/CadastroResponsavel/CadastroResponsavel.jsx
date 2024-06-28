@@ -98,11 +98,20 @@ export function CadastroResponsavel() {
                                     />
                                     {errors.senha && <ErrorText>{errors.senha.message}</ErrorText>}
                                 </S.DivInput>
+                                
                                 {!!responseError && <ErrorText>{responseError}</ErrorText>}
                             </form>
                         </S.BoxForm>
                     </S.DivForm>
                     <S.BoxForm>
+                        <S.DivInput>
+                            <S.InputStyled
+                                type='url'
+                                placeholder='Link foto de perfil'
+                                {...register('linkFoto')}
+                            />
+                            {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
+                        </S.DivInput>
                         <S.DivInput>
                             <ReactInputMask
                                 mask="99999-999"

@@ -11,6 +11,7 @@ export const useCreateAccountResponsavel = () => {
     const defaultValues = {
         nomeCompleto: '',
         cpf: '',
+        linkFoto: '',
         endereco: {
             cep: '',
             rua: '',

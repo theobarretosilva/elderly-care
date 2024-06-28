@@ -24,6 +24,7 @@ export const useCreateAccountCuidador = () => {
         },
         telefone: '',
         senha: '',
+        linkFoto: '',
         tempoExperiencia: '',
         casosTrabalho: '',
         tempoFormacao: ''
