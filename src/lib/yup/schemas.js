@@ -30,7 +30,8 @@ export const schemas = {
     responsavelForm: yup.object().shape({
         name: validators.requiredString,
         cpf: validators.cpf,
-        photoLink: validators.requiredString,
+        // photoLink: validators.requiredString,
+        // date_birth: validators.dataNascimento,
         address: yup.object().shape({
             cep: validators.cep,
             street: validators.requiredString,
@@ -43,7 +44,7 @@ export const schemas = {
         phone: validators.telefone,
         kinship: validators.requiredString,
         email: validators.email,
-        password: validators.password,
+        pass: validators.password,
     }),
     idosoForm: yup.object().shape({
         name: validators.requiredString,

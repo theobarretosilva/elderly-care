@@ -1,38 +1,58 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { useForm } from "react-hook-form";
+// import { useNavigate } from "react-router";
+// import { useMutation } from "@tanstack/react-query";
+// import { axiosInstance } from '../lib/axios'
+// import { toast } from "react-hot-toast";
+
 import { useState } from "react";
+import { axiosInstance } from "../lib/axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemas } from "../lib/yup/schemas";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { schemas } from '../lib/yup/schemas'
-import { useMutation } from "@tanstack/react-query";
-import { axiosInstance } from '../lib/axios'
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export const useCreateAccountResponsavel = () => {
+    const [name, setName] = useState();
+    const [cpf, setCpf] = useState();
+    const [photo_link, setPhoto_link] = useState();
+    const [date_birth, setDate_birth] = useState();
+    const [phone, setPhone] = useState();
+    const [cep, setCep] = useState();
+    const [street, setStreet] = useState();
+    const [number, setNumber] = useState();
+    const [district, setDistrict] = useState();
+    const [city, setCity] = useState();
+    const [state, setState] = useState();
+    const [complement, setComplement] = useState();
+    const [kinship, setKinship] = useState();
+    const [email, setEmail] = useState();
+    const [pass, setPass] = useState();
+
     const defaultValues = {
-        nomeCompleto: '',
+        name: '',
         cpf: '',
-        linkFoto: '',
-        endereco: {
+        // photoLink: '',
+        // date_birth: '',
+        address: {
             cep: '',
-            rua: '',
-            numero: '',
-            bairro: '',
-            cidade: '',
-            estado: '',
-            complemento: '',
+            street: '',
+            number: '',
+            district: '',
+            city: '',
+            state: '',
+            complement: '',
         },
-        telefone: '',
-        parentesco: '',
+        phone: '',
+        kinship: '',
         email: '',
-        senha: '',
+        pass: '',
     };
 
     const [responseError, setResponseError] = useState('')
 
     const {
-        control,
         register,
-        handleSubmit,
         setError,
         formState: { errors },
     } = useForm({
@@ -40,55 +60,71 @@ export const useCreateAccountResponsavel = () => {
         defaultValues,
     })
 
-    const navigate = useNavigate()
+    const payload = {
+        name,
+        cpf,
+        photo_link,
+        date_birth,
+        phone,
+        address: {
+            cep,
+            street,
+            number,
+            district,
+            city,
+            state,
+            complement,
+        },
+        kinship,
+        email,
+        pass
+    };
 
-    const cadastrarResponsavelMutation = useMutation({
-        mutationFn: (data) => {
-            setResponseError('')
-            const createAccountPromise = axiosInstance.post('/patients/signup/responsible', data)
-            toast.promise(createAccountPromise, {
-              loading: 'Processando...',
-              success: 'Conta criada!',
-              error: 'Houve um erro, tente novamente mais tarde.',
+    const navigate = useNavigate();
+
+    const submit = async (e) => {
+        e.preventDefault();
+    
+        try {
+            // Mostrar notificação de carregamento
+            axiosInstance.post('/patients/signup/responsible', payload)
+            .then((response) => {
+                toast.success('Responsável criado com sucesso! Seguindo para cadastro do idoso.')
+                setTimeout(() => navigate('/cadastroIdoso'), 3 * 1000);
             })
-            return createAccountPromise
-        },
-        onSuccess: () => {
-            setTimeout(() => navigate('/cadastroIdoso'), 3 * 1000)
-        },
-        onError: (error) => {
-            const errorMessage = error.response?.data.message
-            const isRepeatedCpf = errorMessage?.toLocaleLowerCase().includes('cpf')
-            const isRepeatedEmail = errorMessage
-              ?.toLocaleLowerCase()
-              .includes('email')
-      
-            if (isRepeatedCpf) {
-              setError('cpf', { message: 'Já existe um registro com esse CPF' })
-              return
-            }
-      
-            if (isRepeatedEmail) {
-              setError('email', { message: 'Já existe um registro com esse email' })
-              return
-            }
-      
-            setResponseError('Houve um erro, tente novamente mais tarde.')
-        },
-    })
 
-    const handleCadastroForm = (data) => {
-        cadastrarResponsavelMutation.mutate(data)
-    }
+        } catch (error) {
+            console.log(error)
+            // Captura e exibe o erro se a promise falhar
+            setResponseError('Houve um erro, tente novamente mais tarde.');
+                // if (response.statusText === "Conflict") {
+                //     return toast.error('Já existe um usuário com o mesmo CPF/Email cadastrado!');
+                // }
+        }
+    };
     
-    const onSubmit = handleSubmit(handleCadastroForm)
-    
-    return {
-        isLoading: cadastrarResponsavelMutation.isLoading,
-        onSubmit,
-        control,
+
+    return{
+        setValue: {
+            setCep,
+            setCity,
+            setComplement,
+            setCpf,
+            setDate_birth,
+            setDistrict,
+            setEmail,
+            setKinship,
+            setName,
+            setNumber,
+            setPass,
+            setPhone,
+            setPhoto_link,
+            setState,
+            setStreet
+        },
+        submit,
         register,
         errors,
-        responseError,
+        responseError
     }
 }

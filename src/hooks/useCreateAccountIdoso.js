@@ -9,21 +9,21 @@ import toast from "react-hot-toast";
 
 export const useCreateAccountIdoso = () => {
     const defaultValues = {
-        nomeCompleto: '',
+        name: '',
         cpf: '',
-        dataNascimento: '',
-        linkFoto: '',
-        endereco: {
+        date_birth: '',
+        photoLink: '',
+        address: {
             cep: '',
-            rua: '',
-            numero: '',
-            bairro: '',
-            cidade: '',
-            estado: '',
-            complemento: '',
+            street: '',
+            number: '',
+            district: '',
+            city: '',
+            state: '',
+            complement: '',
         },
-        tipoCuidados: '',
-        historicoIdoso: ''
+        ministration: '',
+        historic: ''
     };
 
     const [responseError, setResponseError] = useState('')

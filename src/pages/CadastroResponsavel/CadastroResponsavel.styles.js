@@ -119,3 +119,11 @@ export const BtnCadastrar = styled.button`
 export const ImgSideForm = styled.img`
     width: 20vw;
 `
+
+export const SelectStyled = styled.select`
+    height: 100%;
+    width: 52.5vw;
+    border: none;
+    font-size: 1vw;
+    font-weight: 500;
+`
