@@ -61,5 +61,19 @@ export const schemas = {
         }),
         ministration: validators.requiredString,
         historic: validators.requiredString
+    }),
+    editarIdosoForm: yup.object().shape({
+        date_birth: validators.dataNascimento,
+        ministration: validators.requiredString,
+        historic: validators.requiredString,
+        address: yup.object().shape({
+            cep: validators.cep,
+            street: validators.requiredString,
+            number: validators.requiredString,
+            district: validators.requiredString,
+            city: validators.requiredString,
+            state: validators.requiredString,
+            complement: validators.requiredString,
+        }),
     })
 };
