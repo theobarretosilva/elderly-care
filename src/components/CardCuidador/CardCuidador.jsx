@@ -7,7 +7,7 @@ export const CardCuidador = ({ linkFoto, nome, idade, experiencia, formacao, onC
             <S.ImgCuidador src={linkFoto} />
             <S.DivInfo>
                 <S.TxtNome>{nome}</S.TxtNome>
-                <S.TxtInfo>Idade: {idade}</S.TxtInfo>
+                <S.TxtInfo>Idade: {idade} anos</S.TxtInfo>
                 <S.TxtInfo>Experiência: {experiencia}</S.TxtInfo>
                 <S.TxtInfo>Formado(a) faz: {formacao}</S.TxtInfo>
             </S.DivInfo>

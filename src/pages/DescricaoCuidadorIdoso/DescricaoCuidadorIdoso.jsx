@@ -20,7 +20,7 @@ export function DescricaoCuidadorIdoso() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data)
+                console.log(response)
                 setUser(response.data);
             } catch (error) {
                 console.error('Failed to fetch profile:', error);
@@ -32,6 +32,7 @@ export function DescricaoCuidadorIdoso() {
 
     const { cuidador } = location.state || {};
 
+    console.log(cuidador)
     console.log(user);
 
     const templateParams = {
@@ -67,10 +68,10 @@ export function DescricaoCuidadorIdoso() {
         <S.MainStyled>
             <S.BoxFundo>
                 <S.DivDados>
-                    <S.FotoCuidador src={cuidador.photoLink} />
+                    <S.FotoCuidador src={cuidador.photo} />
                     <div>
                         <S.TxtNome>{cuidador.name}</S.TxtNome>
-                        <S.TxtInfo>Idade: {cuidador.age}</S.TxtInfo>
+                        <S.TxtInfo>Idade: {cuidador.date_birth} anos</S.TxtInfo>
                         <S.TxtInfo>Experiência: {cuidador.experience}</S.TxtInfo>
                         <S.TxtInfo>Formado(a) faz: {cuidador.training_time}</S.TxtInfo>
                     </div>

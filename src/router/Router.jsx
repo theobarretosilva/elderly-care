@@ -27,7 +27,7 @@ export function Router() {
             <Route path="/cadastroRealizado" element={<CadastroRealizado />} />
 
             {user && (
-                <Route path="/login" element={user === "Idoso" ? <InicioIdoso /> : <InicioCuidador />} />
+                <Route path="/login" element={user === "Elder" ? <InicioIdoso /> : <InicioCuidador />} />
             )}
 
             <Route path="/logged" element={<LoggedLayout />}>
@@ -36,6 +36,7 @@ export function Router() {
                 <Route path="descricaoCuidador" element={<DescricaoCuidadorIdoso />} />
                 <Route path="editarIdoso" element={<EditarDadosIdoso />} />
                 <Route path="editarResponsavel" element={<EditarDadosResponsavel />} />
+                <Route path="inicioCuidador" element={<InicioCuidador />} />
 
                 {/* {user === "Idoso" && (
                     <>
@@ -47,7 +48,6 @@ export function Router() {
 
                 {user === "Cuidador" && (
                     <>
-                        <Route path="inicioCuidador" element={<InicioCuidador />} />
                         <Route path="perfilCuidador" element={<PerfilCuidador />} />
                     </>
                 )} */}

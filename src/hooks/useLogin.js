@@ -23,8 +23,8 @@ export const useLogin = (value) => {
   const handleLoginSuccess = ({ token }) => {
     localStorage.setItem('ElderlyCareToken', token)
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`
-    navigate('/login')
     localStorage.setItem("Usuario atual", value);
+    navigate('/logged/inicioIdoso')
   }
 
   const loginMutation = useMutation({
@@ -34,6 +34,7 @@ export const useLogin = (value) => {
         `${value}/signin`,
         data
       )
+      console.log(responseData)
       return responseData
     },
     onSuccess: handleLoginSuccess,

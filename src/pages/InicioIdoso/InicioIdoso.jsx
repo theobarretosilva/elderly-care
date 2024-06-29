@@ -16,12 +16,8 @@ export function InicioIdoso() {
         const fetchCuidadores = async () => {
             try {
                 const response = await axiosInstance.get('/caregiver/getAvailable');
-                const dataWithAges = response.data.map(cuidador => ({
-                    ...cuidador,
-                    idade: calcularIdade(cuidador.date_birth)
-                }));
-                setCuidadoresData(dataWithAges);
-                setCuidadoresFiltrados(dataWithAges); // Initializing filtered data with fetched data
+                setCuidadoresData(response.data);
+                setCuidadoresFiltrados(response.data); // Initializing filtered data with fetched data
             } catch (error) {
                 console.error('Failed to fetch caregivers:', error);
             }
@@ -53,25 +49,6 @@ export function InicioIdoso() {
 
         filterCuidadores();
     }, [idadeFiltro, experienciaFiltro, formacaoFiltro, cuidadoresData]);
-
-    const calcularIdade = (dataNascimento) => {
-        if (!dataNascimento) return null;
-
-        const hoje = new Date();
-        const nascimento = new Date(dataNascimento);
-
-        if (isNaN(nascimento.getTime())) {
-            // Se a data de nascimento não for válida, retorne null ou um valor padrão
-            return null;
-        }
-
-        let idade = hoje.getFullYear() - nascimento.getFullYear();
-        const mes = hoje.getMonth() - nascimento.getMonth();
-        if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-            idade--;
-        }
-        return idade;
-    };
 
     return (
         <S.MainStyled>
@@ -109,7 +86,7 @@ export function InicioIdoso() {
                         key={cuidador.cpf}
                         linkFoto={cuidador.photo} 
                         nome={cuidador.name}
-                        idade={cuidador.idade}
+                        idade={cuidador.date_birth}
                         experiencia={cuidador.experience}
                         formacao={cuidador.training_time}
                         onClick={() => navigate('/logged/descricaoCuidador', { state: { cuidador } })}
