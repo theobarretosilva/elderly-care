@@ -1,13 +1,12 @@
-/* eslint-disable no-unused-vars */
 import * as S from './CadastroIdoso.styles'
 import arrowLeft from '../../assets/svg/arrow-left.svg';
 import { useNavigate } from 'react-router';
 import logoCompleta from '../../assets/img/logo_completa.png';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
 import ReactInputMask from 'react-input-mask';
-import { CircularProgress } from '@mui/material';
 import { useCreateAccountIdoso } from '../../hooks/useCreateAccountIdoso'
 import { Toaster } from 'react-hot-toast';
+import { estados } from '../../lib/states'
 
 export function CadastroIdoso() {
     const navigate = useNavigate();
@@ -104,12 +103,15 @@ export function CadastroIdoso() {
                                         />
                                     </S.DivInput>
                                     <S.DivInput style={{width: '48%'}}>
-                                        <S.InputStyled
+                                        <S.SelectStyled
                                             required
-                                            type='text'
-                                            placeholder='Estado'
                                             onChange={(e) => setValue.setState(e.target.value)}
-                                        />
+                                        >
+                                            <option value="" disabled selected>Estado</option>
+                                            {estados.map((estado) => (
+                                                <option key={estado} value={estado}>{estado}</option>
+                                            ))}
+                                        </S.SelectStyled>
                                     </S.DivInput>
                                     <S.DivInput>
                                         <S.InputStyled

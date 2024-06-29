@@ -7,7 +7,7 @@ import { axiosInstance } from '../lib/axios'
 import { useMutation } from "@tanstack/react-query";
 
 export const useLogin = (value) => {
-  const defaultValues = { email: '', pass: '' };
+  const defaultValues = { email: '', password: '' };
   const navigate = useNavigate();
   const [responseError, setResponseError] = useState('');
 

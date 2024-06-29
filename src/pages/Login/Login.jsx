@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useLogin } from '../../hooks/useLogin';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
+import { Toaster } from 'react-hot-toast';
 
 export function Login() {
     const [visible, setVisible] = useState(false);
@@ -40,7 +41,7 @@ export function Login() {
                     </S.DivInput>
                     {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                     <S.DivInput>
-                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha' {...register('pass')}/>
+                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha' {...register('password')}/>
                         <S.IconStyled 
                             src={visible ? eyeClosedIcon : eyeIcon} 
                             style={{cursor: 'pointer'}} 
@@ -70,6 +71,7 @@ export function Login() {
                         </span>
                     </S.PCriarConta>
                 </form>
+                <Toaster position="bottom-center" />
             </S.BoxLogin>
         </S.MainStyled>
     );

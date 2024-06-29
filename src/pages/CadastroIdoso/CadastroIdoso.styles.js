@@ -154,3 +154,11 @@ export const BtnCadastrar = styled.button`
     margin-top: 1vh;
     cursor: pointer;
 `
+
+export const SelectStyled = styled.select`
+    height: 100%;
+    width: 52.5vw;
+    border: none;
+    font-size: 1vw;
+    font-weight: 500;
+`
