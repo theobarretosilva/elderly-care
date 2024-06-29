@@ -7,7 +7,7 @@ import { axiosInstance } from '../lib/axios'
 import { useMutation } from "@tanstack/react-query";
 
 export const useLogin = (value) => {
-  const defaultValues = { email: '', password: '' };
+  const defaultValues = { email: '', pass: '' };
   const navigate = useNavigate();
   const [responseError, setResponseError] = useState('');
 
@@ -16,7 +16,7 @@ export const useLogin = (value) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schemas.signInForm),
+    resolver: yupResolver(schemas.loginForm),
     defaultValues,
   })
 
@@ -24,6 +24,7 @@ export const useLogin = (value) => {
     localStorage.setItem('ElderlyCareToken', token)
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`
     navigate('/login')
+    localStorage.setItem("Usuario atual", value);
   }
 
   const loginMutation = useMutation({

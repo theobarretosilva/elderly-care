@@ -18,7 +18,7 @@ export const CardCuidador = ({ linkFoto, nome, idade, experiencia, formacao, onC
 CardCuidador.propTypes = {
     linkFoto: PropTypes.string.isRequired,
     nome: PropTypes.string.isRequired,
-    idade: PropTypes.number.isRequired,
+    idade: PropTypes.string.isRequired,
     experiencia: PropTypes.string.isRequired,
     formacao: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired

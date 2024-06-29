@@ -1,66 +1,84 @@
 import { useState, useEffect } from 'react';
 import { CardCuidador } from '../../components/CardCuidador/CardCuidador';
 import * as S from './InicioIdoso.styles';
-import { useGetCuidadores } from '../../hooks/useGetCuidadores';
 import { useNavigate } from 'react-router';
+import { axiosInstance } from '../../lib/axios';
 
 export function InicioIdoso() {
     const navigate = useNavigate();
-    const { cuidadoresData } = useGetCuidadores();
-
+    const [cuidadoresData, setCuidadoresData] = useState([]);
     const [idadeFiltro, setIdadeFiltro] = useState('');
     const [experienciaFiltro, setExperienciaFiltro] = useState('');
     const [formacaoFiltro, setFormacaoFiltro] = useState('');
     const [cuidadoresFiltrados, setCuidadoresFiltrados] = useState([]);
 
     useEffect(() => {
-        let filtrados = cuidadoresData;
+        const fetchCuidadores = async () => {
+            try {
+                const response = await axiosInstance.get('/caregiver/getAvailable');
+                const dataWithAges = response.data.map(cuidador => ({
+                    ...cuidador,
+                    idade: calcularIdade(cuidador.date_birth)
+                }));
+                setCuidadoresData(dataWithAges);
+                setCuidadoresFiltrados(dataWithAges); // Initializing filtered data with fetched data
+            } catch (error) {
+                console.error('Failed to fetch caregivers:', error);
+            }
+        };
 
-        if (idadeFiltro) {
-            const [minIdade, maxIdade] = idadeFiltro.split('-').map(num => parseInt(num.replace('+', '')));
-            filtrados = filtrados.filter(cuidador => {
-                const idade = parseInt(cuidador.idade);
-                if (maxIdade) {
-                    return idade >= minIdade && idade <= maxIdade;
-                } else {
-                    return idade >= minIdade;
-                }
-            });
-        }
+        fetchCuidadores();
+    }, []);
 
-        if (experienciaFiltro) {
-            const [minExperiencia, maxExperiencia] = experienciaFiltro.split('-').map(num => parseInt(num.replace('+', '')));
-            filtrados = filtrados.filter(cuidador => {
-                const experiencia = parseInt(cuidador.experiencia);
-                if (maxExperiencia) {
-                    return experiencia >= minExperiencia && experiencia <= maxExperiencia;
-                } else {
-                    return experiencia >= minExperiencia;
-                }
-            });
-        }
+    useEffect(() => {
+        const filterCuidadores = () => {
+            let filtrados = cuidadoresData;
 
-        if (formacaoFiltro) {
-            const [minFormacao, maxFormacao] = formacaoFiltro.split('-').map(num => parseInt(num.replace('+', '')));
-            filtrados = filtrados.filter(cuidador => {
-                const formacao = parseInt(cuidador.formacao);
-                if (maxFormacao) {
-                    return formacao >= minFormacao && formacao <= maxFormacao;
-                } else {
-                    return formacao >= minFormacao;
-                }
-            });
-        }
+            const applyFilter = (data, filterKey, filterValue) => {
+                if (!filterValue) return data;
 
-        setCuidadoresFiltrados(filtrados);
+                const [min, max] = filterValue.split('-').map(num => parseInt(num.replace('+', '')));
+                return data.filter(cuidador => {
+                    const value = parseInt(cuidador[filterKey]);
+                    return max ? value >= min && value <= max : value >= min;
+                });
+            };
+
+            filtrados = applyFilter(filtrados, 'idade', idadeFiltro);
+            filtrados = applyFilter(filtrados, 'experiencia', experienciaFiltro);
+            filtrados = applyFilter(filtrados, 'formacao', formacaoFiltro);
+
+            setCuidadoresFiltrados(filtrados);
+        };
+
+        filterCuidadores();
     }, [idadeFiltro, experienciaFiltro, formacaoFiltro, cuidadoresData]);
+
+    const calcularIdade = (dataNascimento) => {
+        if (!dataNascimento) return null;
+
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento);
+
+        if (isNaN(nascimento.getTime())) {
+            // Se a data de nascimento não for válida, retorne null ou um valor padrão
+            return null;
+        }
+
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const mes = hoje.getMonth() - nascimento.getMonth();
+        if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+            idade--;
+        }
+        return idade;
+    };
 
     return (
         <S.MainStyled>
             <S.TxtInicial>Cuidadores disponíveis para proposta</S.TxtInicial>
             <S.Linha />
             <S.DivFiltros>
-                <S.SelectStyled onChange={(e) => setIdadeFiltro(e.target.value)} defaultValue="">
+                <S.SelectStyled onChange={(e) => setIdadeFiltro(e.target.value)} value={idadeFiltro}>
                     <option value="" disabled>Idade</option>
                     <option value="18-25">18 - 25 anos</option>
                     <option value="25-30">25 - 30 anos</option>
@@ -68,7 +86,7 @@ export function InicioIdoso() {
                     <option value="35-40">35 - 40 anos</option>
                     <option value="40+">+40 anos</option>
                 </S.SelectStyled>
-                <S.SelectStyled style={{ width: '12vw' }} onChange={(e) => setExperienciaFiltro(e.target.value)} defaultValue="">
+                <S.SelectStyled style={{ width: '12vw' }} onChange={(e) => setExperienciaFiltro(e.target.value)} value={experienciaFiltro}>
                     <option value="" disabled>Experiência</option>
                     <option value="0-1">0 - 1 anos</option>
                     <option value="1-2">1 - 2 anos</option>
@@ -76,7 +94,7 @@ export function InicioIdoso() {
                     <option value="3-5">3 - 5 anos</option>
                     <option value="5+">+5 anos</option>
                 </S.SelectStyled>
-                <S.SelectStyled style={{ width: '15vw' }} onChange={(e) => setFormacaoFiltro(e.target.value)} defaultValue="">
+                <S.SelectStyled style={{ width: '15vw' }} onChange={(e) => setFormacaoFiltro(e.target.value)} value={formacaoFiltro}>
                     <option value="" disabled>Tempo de formação</option>
                     <option value="0-1">0 - 1 anos</option>
                     <option value="1-2">1 - 2 anos</option>
@@ -88,17 +106,16 @@ export function InicioIdoso() {
             <S.DivCards>
                 {cuidadoresFiltrados.map((cuidador) => (
                     <CardCuidador 
-                        key={cuidador.id}
-                        linkFoto={cuidador.linkFoto} 
-                        nome={cuidador.nome}
+                        key={cuidador.cpf}
+                        linkFoto={cuidador.photo} 
+                        nome={cuidador.name}
                         idade={cuidador.idade}
-                        experiencia={cuidador.experiencia}
-                        formacao={cuidador.formacao}
-                        certificacoes={cuidador.certificacoes}
-                        onClick={() => navigate('/logged/descricaoCuidador', cuidador)}
+                        experiencia={cuidador.experience}
+                        formacao={cuidador.training_time}
+                        onClick={() => navigate('/logged/descricaoCuidador', { state: { cuidador } })}
                     />
                 ))}
             </S.DivCards>
         </S.MainStyled>
-    )
+    );
 }

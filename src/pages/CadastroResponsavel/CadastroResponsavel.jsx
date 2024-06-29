@@ -14,7 +14,7 @@ import { estados } from '../../lib/states'
 export function CadastroResponsavel() {
 
     const navigate = useNavigate();
-    const { setValue, submit, errors, register, responseError } = useCreateAccountResponsavel();
+    const { setValue, submit, responseError } = useCreateAccountResponsavel();
 
     const [visible, setVisible] = useState(false);
 
@@ -34,46 +34,42 @@ export function CadastroResponsavel() {
                                 <S.TxtInsertInfo>Insira suas informações, como responsável pelo idoso</S.TxtInsertInfo>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='Nome completo'
-                                        {...register('name')}
                                         onChange={(e) => setValue.setName(e.target.value)}
                                     />
-                                    {errors.name && <ErrorText>{errors.name.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="999.999.999-99"
-                                        {...register('cpf')}
                                         onChange={(e) => setValue.setCpf(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CPF" />}
                                     </ReactInputMask>
-                                    {errors.cpf && <ErrorText>{errors.cpf.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="(99) 99999-9999"
-                                        {...register('phone')}
                                         onChange={(e) => setValue.setPhone(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="tel" placeholder="Telefone" />}
                                     </ReactInputMask>
-                                    {errors.phone && <ErrorText>{errors.phone.message}</ErrorText>}
                                 </S.DivInput>
-                                {/* <S.DivInput>
+                                <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="99/99/9999"
-                                        {...register('date_birth')}
                                         onChange={(e) => setValue.setDate_birth(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="Data de nascimento" />}
                                     </ReactInputMask>
-                                    {errors.date_birth && <ErrorText>{errors.date_birth.message}</ErrorText>}
-                                </S.DivInput> */}
+                                </S.DivInput>
                                 <S.DivInput>
                                     <S.SelectStyled
-                                        {...register('kinship')}
+                                        required
                                         onChange={(e) => setValue.setKinship(e.target.value)}
                                     >
                                         <option value="" disabled selected>Parentesco</option>
@@ -83,22 +79,20 @@ export function CadastroResponsavel() {
                                         <option value="RESPONSÁVEL LEGAL">Responsável Legal</option>
                                         <option value="OUTROS">Outros</option>
                                     </S.SelectStyled>
-                                    {errors.kinship && <ErrorText>{errors.kinship.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='E-mail'
-                                        {...register('email')}
                                         onChange={(e) => setValue.setEmail(e.target.value)}
                                     />
-                                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type={visible ? 'text' : 'password'}
                                         placeholder='Senha'
-                                        {...register('pass')}
                                         onChange={(e) => setValue.setPass(e.target.value)}
                                     />
                                     <S.IconStyled
@@ -106,61 +100,55 @@ export function CadastroResponsavel() {
                                         style={{ cursor: 'pointer' }}
                                         onClick={() => setVisible(!visible)}
                                     />
-                                    {errors.pass && <ErrorText>{errors.pass.message}</ErrorText>}
                                 </S.DivInput>
                                 {!!responseError && <ErrorText>{responseError}</ErrorText>}
                             </S.BoxForm>
                         </S.DivForm>
                         <S.BoxForm>
-                            {/* <S.DivInput>
+                            <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='url'
                                     placeholder='Link foto de perfil'
-                                    {...register('photoLink')}
-                                    onChange={(e) => setValue.setPhoto_link(e.target.value)}
+                                    onChange={(e) => setValue.setphoto(e.target.value)}
                                 />
-                                {errors.photo_link && <ErrorText>{errors.photo_link.message}</ErrorText>}
-                            </S.DivInput> */}
+                            </S.DivInput>
                             <S.DivInput>
                                 <ReactInputMask
+                                    required
                                     mask="99999-999"
-                                    {...register('endereco.cep')}
                                     onChange={(e) => setValue.setCep(e.target.value)}
                                 >
                                     {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CEP" />}
                                 </ReactInputMask>
-                                {errors.cep && <ErrorText>{errors.cep.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='text'
                                     placeholder='Rua'
-                                    {...register('endereco.street')}
                                     onChange={(e) => setValue.setStreet(e.target.value)}
                                 />
-                                {errors.street && <ErrorText>{errors.street.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='number'
                                     placeholder='Número'
-                                    {...register('endereco.number')}
                                     onChange={(e) => setValue.setNumber(e.target.value)}
                                 />
-                                {errors.number && <ErrorText>{errors.number.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='text'
                                     placeholder='Bairro'
-                                    {...register('endereco.district')}
                                     onChange={(e) => setValue.setDistrict(e.target.value)}
                                 />
-                                {errors.district && <ErrorText>{errors.district.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.SelectStyled
-                                    {...register('endereco.state')}
+                                    required
                                     onChange={(e) => setValue.setState(e.target.value)}
                                 >
                                     <option value="" disabled selected>Estado</option>
@@ -168,25 +156,22 @@ export function CadastroResponsavel() {
                                         <option key={estado} value={estado}>{estado}</option>
                                     ))}
                                 </S.SelectStyled>
-                                {errors.state && <ErrorText>{errors.state.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='text'
                                     placeholder='Cidade'
-                                    {...register('endereco.city')}
                                     onChange={(e) => setValue.setCity(e.target.value)}
                                 />
-                                {errors.city && <ErrorText>{errors.city.message}</ErrorText>}
                             </S.DivInput>
                             <S.DivInput>
                                 <S.InputStyled
+                                    required
                                     type='text'
                                     placeholder='Complemento'
-                                    {...register('endereco.complement')}
                                     onChange={(e) => setValue.setComplement(e.target.value)}
                                 />
-                                {errors.complement && <ErrorText>{errors.complement.message}</ErrorText>}
                             </S.DivInput>
                             <S.BtnCadastrar>Criar conta</S.BtnCadastrar>
                             {!!responseError && <ErrorText>{responseError}</ErrorText>}

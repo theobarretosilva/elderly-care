@@ -1,11 +1,9 @@
 import { useNavigate } from 'react-router'
 import * as S from './Navbar.styles'
-import { useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
 
 export const Navbar = () => {
     const navigate = useNavigate();
-    const { user } = useContext(UserContext);
+    const user = localStorage.getItem("Usuario atual");
 
     return(
         <S.HeaderStyled>

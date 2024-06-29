@@ -2,20 +2,44 @@ import { useLocation } from 'react-router';
 import * as S from './DescricaoCuidadorIdoso.styles'
 import emaisjs from '@emailjs/browser'
 import toast from 'react-hot-toast';
-import { useGetUser } from '../../hooks/useGetUser'
+import { useEffect, useState } from 'react';
+import { axiosInstance } from '../../lib/axios';
 
 export function DescricaoCuidadorIdoso() {
-    const { usuario } = useGetUser();
     const location = useLocation();
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        const fetchPerfil = async () => {
+            try {
+                // Supondo que você tenha o token armazenado em algum lugar, como o localStorage ou um state
+                const token = localStorage.getItem('ElderlyCareToken'); // ou obtenha de onde você armazena o token
+
+                const response = await axiosInstance.get('/patients/profile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response.data)
+                setUser(response.data);
+            } catch (error) {
+                console.error('Failed to fetch profile:', error);
+            }
+        };
+
+        fetchPerfil();
+    }, []);
 
     const { cuidador } = location.state || {};
 
+    console.log(user);
+
     const templateParams = {
-        from_name: usuario.nome,
+        from_name: user.name,
         to_name: cuidador.name,
         message: "Olá! Me interessei pelo seu perfil! Por favor, entre em contato comigo por meio dos contatos abaixo:",
-        email: usuario.email,
-        phone: usuario.telefone,
+        email: user.email,
+        phone: user.phone,
     };
 
     const sendEmail = (e) => {

@@ -11,13 +11,11 @@ import { EditarDadosIdoso } from "../pages/EditarDadosIdoso/EditarDadosIdoso";
 import { CadastroCuidador } from "../pages/CadastroCuidador/CadastroCuidador";
 import { InicioCuidador } from "../pages/InicioCuidador/InicioCuidador";
 // import { PerfilCuidador } from "../pages/PerfilCuidador/PerfilCuidador";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
 import { LoggedLayout } from "../layouts/LoggedLayout/LoggedLayout";
 import { EditarDadosResponsavel } from '../pages/EditarDadosResponsavel/EditarDadosResponsavel'
 
 export function Router() {
-    const { user } = useContext(UserContext);
+    const user = localStorage.getItem("Usuario atual");
 
     return (
         <Routes>

@@ -1,21 +1,12 @@
-// import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router";
-// import { useMutation } from "@tanstack/react-query";
-// import { axiosInstance } from '../lib/axios'
-// import { toast } from "react-hot-toast";
-
 import { useState } from "react";
 import { axiosInstance } from "../lib/axios";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemas } from "../lib/yup/schemas";
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 export const useCreateAccountResponsavel = () => {
     const [name, setName] = useState();
     const [cpf, setCpf] = useState();
-    const [photo_link, setPhoto_link] = useState();
+    const [photo, setphoto] = useState();
     const [date_birth, setDate_birth] = useState();
     const [phone, setPhone] = useState();
     const [cep, setCep] = useState();
@@ -29,41 +20,12 @@ export const useCreateAccountResponsavel = () => {
     const [email, setEmail] = useState();
     const [pass, setPass] = useState();
 
-    const defaultValues = {
-        name: '',
-        cpf: '',
-        // photoLink: '',
-        // date_birth: '',
-        address: {
-            cep: '',
-            street: '',
-            number: '',
-            district: '',
-            city: '',
-            state: '',
-            complement: '',
-        },
-        phone: '',
-        kinship: '',
-        email: '',
-        pass: '',
-    };
-
     const [responseError, setResponseError] = useState('')
-
-    const {
-        register,
-        setError,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schemas.responsavelForm),
-        defaultValues,
-    })
 
     const payload = {
         name,
         cpf,
-        photo_link,
+        photo,
         date_birth,
         phone,
         address: {
@@ -118,13 +80,11 @@ export const useCreateAccountResponsavel = () => {
             setNumber,
             setPass,
             setPhone,
-            setPhoto_link,
+            setphoto,
             setState,
             setStreet
         },
         submit,
-        register,
-        errors,
         responseError
     }
 }

@@ -1,13 +1,11 @@
-import { useContext } from "react"
-import { UserContext } from "../../context/UserContext"
 import * as S from './CadastroRealizado.styles'
 import { useNavigate } from "react-router";
 
 export function CadastroRealizado() {
-    const { user } = useContext(UserContext);
     const navigate = useNavigate()
+    const user = localStorage.getItem("Usuario atual");
 
-    if (user == "Idoso") {
+    if (user == "Elder") {
         setTimeout(() => navigate('/inicioIdoso'), 3 * 1000)
     } else {
         setTimeout(() => navigate('/InicioCuidador'), 3 * 1000)

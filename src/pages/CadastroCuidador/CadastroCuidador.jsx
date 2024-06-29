@@ -4,22 +4,16 @@ import eyeIcon from '../../assets/svg/eye.svg';
 import eyeClosedIcon from '../../assets/svg/eye_closed.svg';
 import arrowLeft from '../../assets/svg/arrow-left.svg';
 import { useState } from 'react';
-import { CircularProgress } from '@mui/material';
 import { useCreateAccountCuidador } from '../../hooks/useCreateAccountCuidador';
 import { Toaster } from 'react-hot-toast';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
 import { useNavigate } from 'react-router';
 import ReactInputMask from 'react-input-mask';
+import { estados } from '../../lib/states';
 
 export function CadastroCuidador() {
     const navigate = useNavigate();
-    const { onSubmit, register, isLoading, responseError, errors } = useCreateAccountCuidador();
-
-    const SignInButtonLabel = isLoading ? (
-        <CircularProgress size="1.5rem" color="inherit" />
-    ) : (
-        'Criar Conta'
-    );
+    const { setValue, submit, responseError } = useCreateAccountCuidador();
 
     const [visible, setVisible] = useState(false);
     
@@ -30,7 +24,7 @@ export function CadastroCuidador() {
                 <S.TxtVoltar>Voltar</S.TxtVoltar>
             </S.DivVoltar>
             <S.MainStyled>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={submit}>
                     <S.DivLogoForm>
                         <S.DivLogoForm1>
                             <S.LogoStyled src={logoCompleta} />
@@ -39,67 +33,68 @@ export function CadastroCuidador() {
                                 <S.TxtInsertInfo>Insira suas informações abaixo</S.TxtInsertInfo>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='Nome completo'
-                                        {...register('name')}
+                                        onChange={(e) => setValue.setName(e.target.value)}
                                     />
-                                    {errors.nomeCompleto && <ErrorText>{errors.nomeCompleto.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="999.999.999-99"
-                                        {...register('cpf')}
+                                        onChange={(e) => setValue.setCpf(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CPF" />}
                                     </ReactInputMask>
-                                    {errors.cpf && <ErrorText>{errors.cpf.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="(99) 99999-9999"
-                                        {...register('phone')}
+                                        onChange={(e) => setValue.setPhone(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="tel" placeholder="Telefone" />}
                                     </ReactInputMask>
-                                    {errors.telefone && <ErrorText>{errors.telefone.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <ReactInputMask
+                                        required
                                         mask="99/99/9999"
-                                        {...register('date_birth')}
+                                        onChange={(e) => setValue.setDate_birth(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="Data de nascimento" />}
                                     </ReactInputMask>
-                                    {errors.dataNascimento && <ErrorText>{errors.dataNascimento.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='E-mail'
-                                        {...register('email')}
+                                        onChange={(e) => setValue.setEmail(e.target.value)}
                                     />
-                                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type={visible ? 'text' : 'password'}
                                         placeholder='Senha'
-                                        {...register('password')}
+                                        onChange={(e) => setValue.setPassword(e.target.value)}
                                     />
                                     <S.IconStyled
+                                        required
                                         src={visible ? eyeClosedIcon : eyeIcon}
                                         style={{ cursor: 'pointer' }}
                                         onClick={() => setVisible(!visible)}
                                     />
-                                    {errors.senha && <ErrorText>{errors.senha.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput>
                                     <S.InputStyled
+                                        required
                                         type='url'
                                         placeholder='Link foto de perfil'
-                                        {...register('photoLink')}
+                                        onChange={(e) => setValue.setphoto(e.target.value)}
                                     />
-                                    {errors.linkFoto && <ErrorText>{errors.linkFoto.message}</ErrorText>}
                                 </S.DivInput>
                             </S.BoxForm>
                         </S.DivLogoForm1>
@@ -107,91 +102,94 @@ export function CadastroCuidador() {
                             <S.DivFormEndereco>
                                 <S.DivInput style={{width: '48%'}}>
                                     <ReactInputMask
+                                        required
                                         mask="99999-999"
-                                        {...register('address.cep')}
+                                        onChange={(e) => setValue.setCep(e.target.value)}
                                     >
                                         {(inputProps) => <S.InputStyled {...inputProps} type="text" placeholder="CEP" />}
                                     </ReactInputMask>
-                                    {errors.cep && <ErrorText>{errors.cep.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput style={{width: '48%'}}>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='Rua'
-                                        {...register('address.street')}
+                                        onChange={(e) => setValue.setStreet(e.target.value)}
                                     />
-                                    {errors.rua && <ErrorText>{errors.rua.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput style={{width: '48%'}}>
                                     <S.InputStyled
+                                        required
                                         type='number'
                                         placeholder='Número'
-                                        {...register('address.number')}
+                                        onChange={(e) => setValue.setNumber(e.target.value)}
                                     />
-                                    {errors.numero && <ErrorText>{errors.numero.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput style={{width: '48%'}}>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='Bairro'
-                                        {...register('address.distric')}
+                                        onChange={(e) => setValue.setDistrict(e.target.value)}
                                     />
-                                    {errors.bairro && <ErrorText>{errors.bairro.message}</ErrorText>}
+                                </S.DivInput>
+                                <S.DivInput style={{width: '48%'}}>
+                                    <S.SelectStyled
+                                        required
+                                        onChange={(e) => setValue.setState(e.target.value)}
+                                    >
+                                        <option value="" disabled selected>Estado</option>
+                                        {estados.map((estado) => (
+                                            <option key={estado} value={estado}>{estado}</option>
+                                        ))}
+                                    </S.SelectStyled>
                                 </S.DivInput>
                                 <S.DivInput style={{width: '48%'}}>
                                     <S.InputStyled
+                                        required
                                         type='text'
                                         placeholder='Cidade'
-                                        {...register('address.city')}
+                                        onChange={(e) => setValue.setCity(e.target.value)}
                                     />
-                                    {errors.cidade && <ErrorText>{errors.cidade.message}</ErrorText>}
-                                </S.DivInput>
-                                <S.DivInput style={{width: '48%'}}>
-                                    <S.InputStyled
-                                        type='text'
-                                        placeholder='Estado'
-                                        {...register('address.state')}
-                                    />
-                                    {errors.estado && <ErrorText>{errors.estado.message}</ErrorText>}
                                 </S.DivInput>
                                 <S.DivInput style={{width: '48%'}}>
                                     <S.InputStyled
                                         type='text'
                                         placeholder='Complemento'
-                                        {...register('address.complement')}
+                                        onChange={(e) => setValue.setComplement(e.target.value)}
                                     />
-                                    {errors.complemento && <ErrorText>{errors.complemento.message}</ErrorText>}
                                 </S.DivInput>
                             </S.DivFormEndereco>
                             <S.Linha />
                             <S.TxtSobreVoce>Nos conte um pouco sobre você</S.TxtSobreVoce>
                             <S.DivFormEndereco>
-                                <S.DivInput  style={{width: '48%'}}>
-                                    <S.SelectStyled {...register('experience')}>
-                                        <option value="" disabled>Tempo de experiência na área</option>
+                                <S.DivInput style={{width: '48%'}}>
+                                    <S.SelectStyled required onChange={(e) => setValue.setExperience(e.target.value)}>
+                                        <option value="" selected disabled>Tempo de experiência na área</option>
                                         <option value="0-1 anos">0 - 1 anos</option>
                                         <option value="1-2 anos">1 - 2 anos</option>
                                         <option value="2-3 anos">2 - 3 anos</option>
                                         <option value="3-5 anos">3 - 5 anos</option>
                                         <option value="5+ anos">+5 anos</option>
                                     </S.SelectStyled>
-                                    {errors.tempoExperiencia && <ErrorText>{errors.tempoExperiencia.message}</ErrorText>}
                                 </S.DivInput>
-                                <S.DivInput  style={{width: '48%'}}>
-                                    <S.SelectStyled {...register('training_time')}>
-                                        <option value="" disabled>Formado(a) a quanto tempo?</option>
+                                <S.DivInput required style={{width: '48%'}}>
+                                    <S.SelectStyled onChange={(e) => setValue.setTraining_time(e.target.value)}>
+                                        <option value="" selected disabled>Formado(a) a quanto tempo?</option>
                                         <option value="0-1 anos">0 - 1 anos</option>
                                         <option value="1-2 anos">1 - 2 anos</option>
                                         <option value="2-3 anos">2 - 3 anos</option>
                                         <option value="3-5 anos">3 - 5 anos</option>
                                         <option value="5+ anos">+5 anos</option>
                                     </S.SelectStyled>
-                                    {errors.tempoFormacao && <ErrorText>{errors.tempoFormacao.message}</ErrorText>}
                                 </S.DivInput>
                             </S.DivFormEndereco>
-                            <S.TextAreaStyled placeholder='Descreva casos em que você trabalhou...' {...register('description_experience')} />
-                            {errors.casosTrabalho && <ErrorText>{errors.casosTrabalho.message}</ErrorText>}
-                            <S.BtnCadastrar>{SignInButtonLabel}</S.BtnCadastrar>
+                            <S.TextAreaStyled
+                                required
+                                placeholder='Descreva casos em que você trabalhou...'
+                                onChange={(e) => setValue.setDescription_experience(e.target.value)}
+                            />
+                            <S.BtnCadastrar>Cadastrar</S.BtnCadastrar>
                             {!!responseError && <ErrorText>{responseError}</ErrorText>}
                         </S.BoxForm2>
                     </S.DivLogoForm>

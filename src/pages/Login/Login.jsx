@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import * as S from './Login.styles';
 import logoCompleta from '../../assets/img/logo_completa.png';
 import eyeIcon from '../../assets/svg/eye.svg';
@@ -8,14 +8,12 @@ import { useNavigate } from 'react-router';
 import { CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useLogin } from '../../hooks/useLogin';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
-import { UserContext } from '../../context/UserContext';
 
 export function Login() {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
-    const { setUser } = useContext(UserContext);
 
-    const [value, setValue] = useState('patients');
+    const [value, setValue] = useState('Patients');
 
     const handleChange = (event) => {
         setValue((event.target).value);
@@ -42,7 +40,7 @@ export function Login() {
                     </S.DivInput>
                     {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                     <S.DivInput>
-                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha' {...register('password')}/>
+                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha' {...register('pass')}/>
                         <S.IconStyled 
                             src={visible ? eyeClosedIcon : eyeIcon} 
                             style={{cursor: 'pointer'}} 
@@ -60,8 +58,8 @@ export function Login() {
                             value={value}
                             onChange={handleChange}
                         >
-                            <FormControlLabel onClick={setUser('Idoso')} value="patients" control={<Radio />} label="Responsável" />
-                            <FormControlLabel onClick={setUser('Cuidador')} value="caregiver" control={<Radio />} label="Cuidador" />
+                            <FormControlLabel value="patients" control={<Radio />} label="Responsável" />
+                            <FormControlLabel value="caregiver" control={<Radio />} label="Cuidador" />
                         </RadioGroup>
                     </FormControl>
                     <S.BtnEntrar>{LoginButtonLabel}</S.BtnEntrar>

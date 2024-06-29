@@ -4,15 +4,28 @@ import { useForm } from "react-hook-form";
 import { schemas } from "../lib/yup/schemas";
 import { useNavigate } from "react-router";
 import { axiosInstance } from "../lib/axios";
-import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export const useCreateAccountIdoso = () => {
+    const [name, setName] = useState();
+    const [cpf, setCpf] = useState();
+    const [date_birth, setDate_birth] = useState();
+    const [photo, setphoto] = useState();
+    const [cep, setCep] = useState();
+    const [street, setStreet] = useState();
+    const [number, setNumber] = useState();
+    const [district, setDistrict] = useState();
+    const [city, setCity] = useState();
+    const [state, setState] = useState();
+    const [complement, setComplement] = useState();
+    const [ministration, setMinistration] = useState();
+    const [historic, setHistoric] = useState();
+
     const defaultValues = {
         name: '',
         cpf: '',
         date_birth: '',
-        photoLink: '',
+        // photo: '',
         address: {
             cep: '',
             street: '',
@@ -29,57 +42,73 @@ export const useCreateAccountIdoso = () => {
     const [responseError, setResponseError] = useState('')
 
     const {
-        control,
         register,
-        handleSubmit,
-        setError,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schemas.idosoForm),
         defaultValues,
     })
 
+    const payload = {
+        name,
+        cpf,
+        date_birth,
+        photo,
+        address: {
+            cep,
+            street,
+            number,
+            district,
+            city,
+            state,
+            complement,
+        },
+        ministration,
+        historic
+    };
+
     const navigate = useNavigate()
 
-    const cadastrarIdosoMutation = useMutation({
-        mutationFn: (data) => {
-            setResponseError('')
-            const createAccountPromise = axiosInstance.post('/patients/signup/elder', data)
-            toast.promise(createAccountPromise, {
-              loading: 'Processando...',
-              success: 'Conta criada!',
-              error: 'Houve um erro, tente novamente mais tarde.',
+    const submit = async (e) => {
+        e.preventDefault();
+    
+        try {
+            // Mostrar notificação de carregamento
+            axiosInstance.post('/patients/signup/elder', payload)
+            .then((response) => {
+                toast.success('Idoso cadastrado com sucesso! Redirecionando para o início')
+                setTimeout(() => navigate('/'), 3 * 1000);
             })
-            return createAccountPromise
-        },
-        onSuccess: () => {
-            setTimeout(() => navigate('/patients/signin'), 3 * 1000)
-        },
-        onError: (error) => {
-            const errorMessage = error.response?.data.message
-            const isRepeatedCpf = errorMessage?.toLocaleLowerCase().includes('cpf')
-      
-            if (isRepeatedCpf) {
-              setError('cpf', { message: 'Já existe um registro com esse CPF' })
-              return
-            }
-      
-            setResponseError('Houve um erro, tente novamente mais tarde.')
-        },
-    });
 
-    const handleCadastroForm = (data) => {
-        cadastrarIdosoMutation.mutate(data)
-    }
-    
-    const onSubmit = handleSubmit(handleCadastroForm)
-    
-    return {
-        isLoading: cadastrarIdosoMutation.isLoading,
-        onSubmit,
-        control,
+        } catch (error) {
+            console.log(error)
+            // Captura e exibe o erro se a promise falhar
+            setResponseError('Houve um erro, tente novamente mais tarde.');
+                // if (response.statusText === "Conflict") {
+                //     return toast.error('Já existe um usuário com o mesmo CPF/Email cadastrado!');
+                // }
+        }
+    };
+
+    return{
+        setValue: {
+            setCep,
+            setCity,
+            setComplement,
+            setCpf,
+            setDate_birth,
+            setDistrict,
+            setName,
+            setNumber,
+            setphoto,
+            setState,
+            setStreet,
+            setMinistration,
+            setHistoric
+        },
+        submit,
         register,
         errors,
-        responseError,
+        responseError
     }
 }

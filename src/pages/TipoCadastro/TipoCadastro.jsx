@@ -3,21 +3,18 @@ import logoCompleta from '../../assets/img/logo_completa.png';
 import ingressoIdoso from '../../assets/img/ingresso_idoso.png';
 import ingressoCuidador from '../../assets/img/ingresso_cuidador.png';
 import { useNavigate } from 'react-router';
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
 import arrowLeft from '../../assets/svg/arrow-left.svg';
 
 export function TipoCadastro() {
-    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const escolhaIdoso = () => {
-        setUser("Idoso");
+        localStorage.setItem("Usuario atual", "Elder");
         navigate('/cadastroResponsavel');
     };
 
     const escolhaCuidador = () => {
-        setUser("Cuidador");
+        localStorage.setItem("Usuario atual", "Caregiver")
         navigate('/cadastroCuidador');
     };
 
