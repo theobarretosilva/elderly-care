@@ -38,7 +38,7 @@ export function PerfilIdoso() {
                         <S.TxtInfo>Contato: 48991227701</S.TxtInfo>
                     </div>
                 </S.DivDados>
-                <S.BtnEditar onClick={() => navigate('editarResponsavel')}>Editar dados</S.BtnEditar>
+                <S.BtnEditar onClick={() => navigate('/logged/editarResponsavel')}>Editar dados</S.BtnEditar>
             </S.BoxFundo>
         </S.MainStyled>
     )
