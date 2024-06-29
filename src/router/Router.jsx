@@ -14,11 +14,10 @@ import { InicioCuidador } from "../pages/InicioCuidador/InicioCuidador";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import { LoggedLayout } from "../layouts/LoggedLayout/LoggedLayout";
+import { EditarDadosResponsavel } from '../pages/EditarDadosResponsavel/EditarDadosResponsavel'
 
 export function Router() {
     const { user } = useContext(UserContext);
-
-    const pathEditarDados = user ? `/editarDados${user}` : "/editarDados";
 
     return (
         <Routes>
@@ -28,7 +27,6 @@ export function Router() {
             <Route path="/cadastroIdoso" element={<CadastroIdoso />} />
             <Route path="/cadastroCuidador" element={<CadastroCuidador />} />
             <Route path="/cadastroRealizado" element={<CadastroRealizado />} />
-            <Route path={pathEditarDados} element={<EditarDadosIdoso />} />
 
             {user && (
                 <Route path="/login" element={user === "Idoso" ? <InicioIdoso /> : <InicioCuidador />} />
@@ -38,6 +36,9 @@ export function Router() {
                 <Route path="inicioIdoso" element={<InicioIdoso />} />
                 <Route path="perfilIdosoEResponsavel" element={<PerfilIdoso />} />
                 <Route path="descricaoCuidador" element={<DescricaoCuidadorIdoso />} />
+                <Route path="editarIdoso" element={<EditarDadosIdoso />} />
+                <Route path="editarResponsavel" element={<EditarDadosResponsavel />} />
+
                 {/* {user === "Idoso" && (
                     <>
                         <Route path="inicioIdoso" element={<InicioIdoso />} />
