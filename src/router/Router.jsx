@@ -10,9 +10,10 @@ import { PerfilIdoso } from "../pages/PerfilIdoso/PerfilIdoso";
 import { EditarDadosIdoso } from "../pages/EditarDadosIdoso/EditarDadosIdoso";
 import { CadastroCuidador } from "../pages/CadastroCuidador/CadastroCuidador";
 import { InicioCuidador } from "../pages/InicioCuidador/InicioCuidador";
-// import { PerfilCuidador } from "../pages/PerfilCuidador/PerfilCuidador";
+import { PerfilCuidador } from "../pages/PerfilCuidador/PerfilCuidador";
 import { LoggedLayout } from "../layouts/LoggedLayout/LoggedLayout";
 import { EditarDadosResponsavel } from '../pages/EditarDadosResponsavel/EditarDadosResponsavel'
+import { EditarDadosCuidador } from "../pages/EditarDadosCuidador/EditarDadosCuidador";
 
 export function Router() {
     const user = localStorage.getItem("Usuario atual");
@@ -37,6 +38,8 @@ export function Router() {
                 <Route path="editarIdoso" element={<EditarDadosIdoso />} />
                 <Route path="editarResponsavel" element={<EditarDadosResponsavel />} />
                 <Route path="inicioCuidador" element={<InicioCuidador />} />
+                <Route path="perfilCuidador" element={<PerfilCuidador />} />
+                <Route path="editarCuidador" element={<EditarDadosCuidador />} />
 
                 {/* {user === "Idoso" && (
                     <>
@@ -48,7 +51,6 @@ export function Router() {
 
                 {user === "Cuidador" && (
                     <>
-                        <Route path="perfilCuidador" element={<PerfilCuidador />} />
                     </>
                 )} */}
             </Route>

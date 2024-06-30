@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import * as S from './EditarDadosResponsavel.styles'
-import { useEffect } from 'react';
-import { axiosInstance } from '../../lib/axios';
+import * as S from './EditarDadosCuidador.styles'
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../../lib/axios";
 import { estados } from '../../lib/states';
 import ReactInputMask from 'react-input-mask';
 
-export const EditarDadosResponsavel = () => {
+export const EditarDadosCuidador = () => {
     const [email, setEmail] = useState();
-    const [kinship, setKinship] = useState();
     const [phone, setPhone] = useState();
+    const [experience, setExperience] = useState();
+    const [description_experience, setDescription_experience] = useState();
+    const [training_time, setTraining_time] = useState();
     const [cep, setCep] = useState();
     const [street, setStreet] = useState();
     const [number, setNumber] = useState();
@@ -18,19 +19,21 @@ export const EditarDadosResponsavel = () => {
     const [complement, setComplement] = useState();
 
     useEffect(() => {
-        const responsavel = JSON.parse(localStorage.getItem("Responsavel"));
-    console.log(responsavel);
-        if (responsavel) {
-            setEmail(responsavel.email);
-            setKinship(responsavel.kinship);
-            setPhone(responsavel.phone);
-            setCep(responsavel.address.cep);
-            setStreet(responsavel.address.street);
-            setNumber(responsavel.address.number);
-            setDistrict(responsavel.address.district);
-            setCity(responsavel.address.city);
-            setState(responsavel.address.state);
-            setComplement(responsavel.address.complement);
+        const cuidador = JSON.parse(localStorage.getItem("Cuidador"));
+
+        if (cuidador) {
+            setEmail(cuidador.email);
+            setPhone(cuidador.phone);
+            setExperience(cuidador.experience);
+            setDescription_experience(cuidador.description_experience);
+            setTraining_time(cuidador.training_time);
+            setCep(cuidador.address.cep);
+            setStreet(cuidador.address.street);
+            setNumber(cuidador.address.number);
+            setDistrict(cuidador.address.district);
+            setCity(cuidador.address.city);
+            setState(cuidador.address.state);
+            setComplement(cuidador.address.complement);
         }
     }, []);
 
@@ -38,9 +41,11 @@ export const EditarDadosResponsavel = () => {
         e.preventDefault();
 
         const token = localStorage.getItem('ElderlyCareToken');
-        const updatedResponsavel = {
+        const updatedCuidador = {
             email,
-            kinship,
+            experience,
+            description_experience,
+            training_time,
             phone,
             address: {
                 cep,
@@ -53,7 +58,7 @@ export const EditarDadosResponsavel = () => {
             }
         };
 
-        const response = await axiosInstance.put('patients/update/responsible', updatedResponsavel, {
+        const response = await axiosInstance.put('caregiver/update', updatedCuidador, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -65,41 +70,52 @@ export const EditarDadosResponsavel = () => {
         <form onSubmit={editarDados}>
             <S.MainStyled>
                 <S.BoxFundo>
-                    <S.TituloBox>Editar dados - Responsável</S.TituloBox>
-                    <S.DivInput>
-                        <S.InputStyled
-                            type='text'
-                            placeholder='E-mail'
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                        />
-                    </S.DivInput>
+                    <S.TituloBox>Editar dados - Cuidador</S.TituloBox>
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                         <S.DivInput style={{width: '48%'}}>
-                            <S.SelectStyled
-                                required
-                                onChange={(e) => setKinship(e.target.value)}
-                                value={kinship}
-                            >
-                                <option value="" disabled selected>Parentesco</option>
-                                <option value="FILHO(A)">Filho(a)</option>
-                                <option value="NETO(A)">Neto(a)</option>
-                                <option value="SOBRINHO(A)">Sobrinho(a)</option>
-                                <option value="RESPONSÁVEL LEGAL">Responsável Legal</option>
-                                <option value="OUTROS">Outros</option>
+                            <S.InputStyled
+                                type='text'
+                                placeholder='E-mail'
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                            />
+                        </S.DivInput>
+                        <S.DivInput style={{width: '48%'}}>
+                            <S.InputStyled
+                                type='text'
+                                placeholder='E-mail'
+                                onChange={(e) => setPhone(e.target.value)}
+                                value={phone}
+                            />
+                        </S.DivInput>  
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <S.DivInput style={{width: '48%'}}>
+                            <S.SelectStyled onChange={(e) => setExperience(e.target.value)} value={experience}>
+                                <option value="" selected disabled>Tempo de experiência</option>
+                                <option value="0-1 anos">0 - 1 anos</option>
+                                <option value="1-2 anos">1 - 2 anos</option>
+                                <option value="2-3 anos">2 - 3 anos</option>
+                                <option value="3-5 anos">3 - 5 anos</option>
+                                <option value="5+ anos">+5 anos</option>
                             </S.SelectStyled>
                         </S.DivInput>
                         <S.DivInput style={{width: '48%'}}>
-                            <ReactInputMask
-                                required
-                                mask="(99) 99999-9999"
-                                onChange={(e) => setPhone(e.target.value)}
-                                value={phone}
-                            >
-                                {(inputProps) => <S.InputStyled {...inputProps} type="tel" placeholder="Telefone" />}
-                            </ReactInputMask>
+                            <S.SelectStyled onChange={(e) => setTraining_time(e.target.value)} value={training_time}>
+                                <option value="" selected disabled>Tempo de formação</option>
+                                <option value="0-1 anos">0 - 1 anos</option>
+                                <option value="1-2 anos">1 - 2 anos</option>
+                                <option value="2-3 anos">2 - 3 anos</option>
+                                <option value="3-5 anos">3 - 5 anos</option>
+                                <option value="5+ anos">+5 anos</option>
+                            </S.SelectStyled>
                         </S.DivInput>
                     </div>
+                    <S.TextAreaStyled
+                        placeholder='Descreva casos em que você trabalhou...'
+                        onChange={(e) => setDescription_experience(e.target.value)}
+                        value={description_experience}
+                    />
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                         <S.DivInput style={{width: '48%'}}>
                             <ReactInputMask

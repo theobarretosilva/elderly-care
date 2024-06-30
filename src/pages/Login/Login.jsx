@@ -75,17 +75,14 @@ export function Login() {
                         <S.InputStyled
                             type='text'
                             placeholder='E-mail'
-                            {...register('email')}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <S.IconStyled src={mailIcon} />
                     </S.DivInput>
-                    {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                     <S.DivInput>
                         <S.InputStyled
                             type={visible ? 'text' : 'password'}
                             placeholder='Senha'
-                            {...register('password')}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <S.IconStyled 
@@ -94,7 +91,6 @@ export function Login() {
                             onClick={() => setVisible(!visible)} 
                         />
                     </S.DivInput>
-                    {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
                     <S.PEsqueciSenha>Esqueceu a senha?</S.PEsqueciSenha>
                     <FormControl>
                         <FormLabel id="demo-row-radio-buttons-group-label">Tipo de login</FormLabel>

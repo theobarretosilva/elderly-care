@@ -40,6 +40,7 @@ export function EditarDadosIdoso() {
     const editarDados = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem('ElderlyCareToken');
         const updatedIdoso = {
             id_elder,
             date_birth,
@@ -55,13 +56,17 @@ export function EditarDadosIdoso() {
                 complement
             }
         };
-        const response = await axiosInstance.put('patients/update/elder', updatedIdoso);
+        const response = await axiosInstance.put('patients/update/elder', updatedIdoso, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         console.log(response);
     }
 
     return(
         <form onSubmit={editarDados}>
-        <S.MainStyled>
+            <S.MainStyled>
                 <S.BoxFundo>
                     <S.TituloBox>Editar dados - Idoso(a)</S.TituloBox>
                     <S.DivInput>
@@ -148,9 +153,7 @@ export function EditarDadosIdoso() {
                     </S.DivInput>
                     <S.BtnConfirmar>Confirmar edição</S.BtnConfirmar>
                 </S.BoxFundo>
-            
-        </S.MainStyled>
+            </S.MainStyled>
         </form>
-
     )
 }

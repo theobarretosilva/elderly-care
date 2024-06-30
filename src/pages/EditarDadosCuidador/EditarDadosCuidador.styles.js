@@ -15,7 +15,7 @@ export const BoxFundo = styled.div`
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width: 34vw;
-    height: 65vh;
+    height: 75vh;
     padding: 2vh 1.5vw 2vh 1.5vw;
 `
 
@@ -66,4 +66,14 @@ export const SelectStyled = styled.select`
     border: none;
     font-size: 1vw;
     font-weight: 500;
+`
+
+export const TextAreaStyled = styled.textarea`
+    width: 100%;
+    height: 11.2vh;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.7vh 0.5vw 0.7vh 0.5vw;
+    margin-top: 2vh;
 `
