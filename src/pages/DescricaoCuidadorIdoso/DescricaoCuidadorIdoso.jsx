@@ -36,11 +36,11 @@ export function DescricaoCuidadorIdoso() {
     console.log(user);
 
     const templateParams = {
-        from_name: user.name,
-        to_name: cuidador.name,
-        message: "Olá! Me interessei pelo seu perfil! Por favor, entre em contato comigo por meio dos contatos abaixo:",
-        email: user.email,
-        phone: user.phone,
+        // from_name: user.name,
+        // to_name: cuidador.name,
+        // message: "Olá! Me interessei pelo seu perfil! Por favor, entre em contato comigo por meio dos contatos abaixo:",
+        // email: user.email,
+        // phone: user.phone,
     };
 
     const sendEmail = (e) => {

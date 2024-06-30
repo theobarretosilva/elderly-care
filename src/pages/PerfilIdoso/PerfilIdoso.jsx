@@ -1,43 +1,86 @@
 import { useNavigate } from 'react-router'
 import * as S from './PerfilIdoso.styles'
 // import { useGetIdoso } from '../../hooks/useGetIdoso'
-// import { useGetResponsavel } from '../../hooks/useGetResponsavel'
+import { useEffect, useState } from 'react';
+import { axiosInstance } from '../../lib/axios';
 
 export function PerfilIdoso() {
-    // const { idoso } = useGetIdoso();
-    // const { responsavel } = useGetResponsavel();
+    const [idosos, setIdosos] = useState([]);
+    const [responsavel, setResponsavel] = useState();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchPerfil = async () => {
+            try {
+                // Supondo que você tenha o token armazenado em algum lugar, como o localStorage ou um state
+                const token = localStorage.getItem('ElderlyCareToken'); // ou obtenha de onde você armazena o token
+
+                const response = await axiosInstance.get('/patients/profile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log(response);
+                setResponsavel(response.data);
+                localStorage.setItem("Responsavel", JSON.stringify(response.data)); // Salva os dados como JSON string
+
+                setIdosos(response.data.elder_id)
+                console.log(idosos)
+            } catch (error) {
+                console.error('Failed to fetch profile:', error);
+            }
+        };
+
+        fetchPerfil();
+    }, []);
+
+    if (!responsavel || !idosos) {
+        return <div>Loading...</div>; // Exibe um carregando enquanto os dados não são carregados
+    }
 
     return(
         <S.MainStyled>
-            <S.BoxFundo>
-                <S.TxtNome style={{textAlign: 'center'}}>Idoso(a)</S.TxtNome>
-                <S.DivDados>
-                    <S.Foto src='../../src/assets/img/user.png' />
-                    <div>
-                        <S.TxtNome>JUliceino ajfnadf</S.TxtNome>
-                        <S.TxtInfo>Idade: </S.TxtInfo>
-                    </div>
-                </S.DivDados>
-                <S.Linha />
-                <S.TxtInfo>Necessidades</S.TxtInfo>
-                <S.TxtDescricao>Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.</S.TxtDescricao>
-                <S.Linha />
-                <S.TxtInfo>Histórico</S.TxtInfo>
-                <S.TxtDescricao>Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.Mollit officia eiusmod proident proident.</S.TxtDescricao>
-                <S.BtnEditar style={{marginTop: '1vh'}} onClick={() => navigate('/logged/editarIdoso')}>Editar dados</S.BtnEditar>
-            </S.BoxFundo>
+            {idosos.map((idoso) => (
+                <S.BoxFundo key={idoso.id}>
+                    <S.TxtNome style={{ textAlign: 'center' }}>Idoso(a)</S.TxtNome>
+                    <S.DivDados>
+                        <S.Foto src={idoso.photo} />
+                        <div>
+                            <S.TxtNome>{idoso.name}</S.TxtNome>
+                            <S.TxtInfo>Idade: {idoso.date_birth}</S.TxtInfo>
+                        </div>
+                    </S.DivDados>
+                    <S.Linha />
+                    <S.TxtInfo>Necessidades</S.TxtInfo>
+                    <S.TxtDescricao>{idoso.ministration}</S.TxtDescricao>
+                    <S.Linha />
+                    <S.TxtInfo>Histórico</S.TxtInfo>
+                    <S.TxtDescricao>{idoso.historic}</S.TxtDescricao>
+                    <S.BtnEditar style={{marginTop: '1vh'}} onClick={() => navigate('/logged/editarIdoso')}>Editar dados</S.BtnEditar>
+                </S.BoxFundo>
+            ))}
             <S.BoxFundo>
                 <S.TxtNome style={{textAlign: 'center'}}>Responsável</S.TxtNome>
                 <S.DivDados>
-                    <S.Foto src='../../src/assets/img/user.png' />
+                    <S.Foto src={responsavel.photo} />
                     <div>
-                        <S.TxtNome>Maria Lucia</S.TxtNome>
-                        <S.TxtInfo>Idade: 45</S.TxtInfo>
-                        <S.TxtInfo>Parentesco: Neto(a)</S.TxtInfo>
-                        <S.TxtInfo>Contato: 48991227701</S.TxtInfo>
+                        <S.TxtNome>{responsavel.name}</S.TxtNome>
+                        <S.TxtInfo>Nascimento: {responsavel.date_birth}</S.TxtInfo>
+                        <S.TxtInfo>Parentesco: {responsavel.kinship}</S.TxtInfo>
+                        <S.TxtInfo>Contato: {responsavel.phone}</S.TxtInfo>
                     </div>
                 </S.DivDados>
+                <br />
+                <S.TxtInfo>E-mail: {responsavel.email}</S.TxtInfo>
+                <S.TxtInfo>CPF: {responsavel.cpf}</S.TxtInfo>
+                <S.Linha />
+                <S.TxtInfo>CEP: {responsavel.address.cep}</S.TxtInfo>
+                <S.TxtInfo>Rua: {responsavel.address.street}</S.TxtInfo>
+                <S.TxtInfo>Número: {responsavel.address.number}</S.TxtInfo>
+                <S.TxtInfo>Bairro: {responsavel.address.district}</S.TxtInfo>
+                <S.TxtInfo>Cidade: {responsavel.address.city}</S.TxtInfo>
+                <S.TxtInfo>Estado: {responsavel.address.state}</S.TxtInfo>
+                <S.TxtInfo>Complemento: {responsavel.address.complement}</S.TxtInfo>
                 <S.BtnEditar onClick={() => navigate('/logged/editarResponsavel')}>Editar dados</S.BtnEditar>
             </S.BoxFundo>
         </S.MainStyled>

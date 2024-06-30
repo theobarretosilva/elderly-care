@@ -130,11 +130,13 @@ export function CadastroIdoso() {
                                 required
                                 placeholder='Quais tipos de cuidados você procura?'
                                 onChange={(e) => setValue.setMinistration(e.target.value)}
+                                maxLength={250}
                             />
                             <S.TextAreaStyled
                                 required
                                 placeholder='Qual o histórico clínico do idoso?'
                                 onChange={(e) => setValue.setHistoric(e.target.value)}
+                                maxLength={250}
                             />
                             <S.BtnCadastrar>Finalizar cadastro</S.BtnCadastrar>
                             {!!responseError && <ErrorText>{responseError}</ErrorText>}

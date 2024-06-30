@@ -14,8 +14,8 @@ export const CardStyled = styled.div`
 `
 
 export const ImgCuidador = styled.img`
-    width: 8vw;
-    height: 17vh;
+    width: 120px;
+    height: 120px;
     border: 1px solid black;
     border-radius: 9999px;
     object-fit: cover;

@@ -43,7 +43,8 @@ export const SelectStyled = styled.select`
 export const DivCards = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 4vw;
     flex-wrap: wrap;
     row-gap: 5vh;
     width: 100%;

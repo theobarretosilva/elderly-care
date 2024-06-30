@@ -41,8 +41,8 @@ export function InicioIdoso() {
             };
 
             filtrados = applyFilter(filtrados, 'idade', idadeFiltro);
-            filtrados = applyFilter(filtrados, 'experiencia', experienciaFiltro);
-            filtrados = applyFilter(filtrados, 'formacao', formacaoFiltro);
+            filtrados = applyFilter(filtrados, 'experience', experienciaFiltro);
+            filtrados = applyFilter(filtrados, 'training_time', formacaoFiltro);
 
             setCuidadoresFiltrados(filtrados);
         };
@@ -56,7 +56,7 @@ export function InicioIdoso() {
             <S.Linha />
             <S.DivFiltros>
                 <S.SelectStyled onChange={(e) => setIdadeFiltro(e.target.value)} value={idadeFiltro}>
-                    <option value="" disabled>Idade</option>
+                    <option value="">Idade</option>
                     <option value="18-25">18 - 25 anos</option>
                     <option value="25-30">25 - 30 anos</option>
                     <option value="30-35">30 - 35 anos</option>
@@ -64,7 +64,7 @@ export function InicioIdoso() {
                     <option value="40+">+40 anos</option>
                 </S.SelectStyled>
                 <S.SelectStyled style={{ width: '12vw' }} onChange={(e) => setExperienciaFiltro(e.target.value)} value={experienciaFiltro}>
-                    <option value="" disabled>Experiência</option>
+                    <option value="">Experiência</option>
                     <option value="0-1">0 - 1 anos</option>
                     <option value="1-2">1 - 2 anos</option>
                     <option value="2-3">2 - 3 anos</option>
@@ -72,7 +72,7 @@ export function InicioIdoso() {
                     <option value="5+">+5 anos</option>
                 </S.SelectStyled>
                 <S.SelectStyled style={{ width: '15vw' }} onChange={(e) => setFormacaoFiltro(e.target.value)} value={formacaoFiltro}>
-                    <option value="" disabled>Tempo de formação</option>
+                    <option value="">Tempo de formação</option>
                     <option value="0-1">0 - 1 anos</option>
                     <option value="1-2">1 - 2 anos</option>
                     <option value="2-3">2 - 3 anos</option>
