@@ -8,19 +8,55 @@ import { useNavigate } from 'react-router';
 import { CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { useLogin } from '../../hooks/useLogin';
 import { ErrorText } from '../../components/ErrorText/ErrorText';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+import { axiosInstance } from '../../lib/axios';
 
 export function Login() {
+    const [value, setValue] = useState('Idoso');
+    const [usuario, setUsuario] = useState();
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const payload = { email, password };
+
+    const fazerLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { data } = await axiosInstance.post(
+                `${value}/signin`,
+                payload
+            );
+            console.log(data)
+
+            if (data.token) {
+                localStorage.setItem('ElderlyCareToken', data.token);
+                axiosInstance.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+                localStorage.setItem("Usuario atual", value);
+                toast.success("Login concluído com sucesso! Redirecionando para a página inicial", {duration: 3000});
+                setTimeout(() => navigate(`/logged/inicio${usuario}`), 3000);
+            }
+
+            if (data === "E-mail e/ou senha incorretos") {
+                toast.error(data, {
+                    duration: 3000
+                })
+            }
+        } catch (error) {
+            console.log("Não foi possível fazer login", error)
+        }
+        
+    }
+
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
-
-    const [value, setValue] = useState('Patients');
 
     const handleChange = (event) => {
         setValue((event.target).value);
     };
 
-    const { isLoading, onSubmit, errors, register, responseError } = useLogin(value)
+    const { isLoading, errors, register, responseError } = useLogin(value)
 
     const LoginButtonLabel = isLoading ? (
         <CircularProgress size="1.5rem" color="inherit" />
@@ -33,15 +69,25 @@ export function Login() {
             <S.LogoStyled src={logoCompleta} />
             <S.BoxLogin>
                 <S.TxtWelcome>Olá, bem vindo(a) de volta 👋</S.TxtWelcome>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={fazerLogin}>
                     <S.PInsInf>Insira suas informações</S.PInsInf>
                     <S.DivInput>
-                        <S.InputStyled type='text' placeholder='E-mail' {...register('email')}/>
+                        <S.InputStyled
+                            type='text'
+                            placeholder='E-mail'
+                            {...register('email')}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                         <S.IconStyled src={mailIcon} />
                     </S.DivInput>
                     {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
                     <S.DivInput>
-                        <S.InputStyled type={visible ? 'text' : 'password'} placeholder='Senha' {...register('password')}/>
+                        <S.InputStyled
+                            type={visible ? 'text' : 'password'}
+                            placeholder='Senha'
+                            {...register('password')}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                         <S.IconStyled 
                             src={visible ? eyeClosedIcon : eyeIcon} 
                             style={{cursor: 'pointer'}} 
@@ -59,8 +105,8 @@ export function Login() {
                             value={value}
                             onChange={handleChange}
                         >
-                            <FormControlLabel value="patients" control={<Radio />} label="Responsável" />
-                            <FormControlLabel value="caregiver" control={<Radio />} label="Cuidador" />
+                            <FormControlLabel onChange={() => setUsuario('Idoso')} value="patients" control={<Radio />} label="Responsável" />
+                            <FormControlLabel onChange={() => setUsuario('Cuidador')} value="caregiver" control={<Radio />} label="Cuidador" />
                         </RadioGroup>
                     </FormControl>
                     <S.BtnEntrar>{LoginButtonLabel}</S.BtnEntrar>
