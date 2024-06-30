@@ -25,6 +25,7 @@ export function PerfilIdoso() {
                 localStorage.setItem("Responsavel", JSON.stringify(response.data)); // Salva os dados como JSON string
 
                 setIdosos(response.data.elder_id)
+                localStorage.setItem("Idoso", JSON.stringify(response.data.elder_id))
                 console.log(idosos)
             } catch (error) {
                 console.error('Failed to fetch profile:', error);

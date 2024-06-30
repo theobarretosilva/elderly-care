@@ -69,3 +69,11 @@ export const TextAreaStyled = styled.textarea`
     padding: 0.7vh 0.5vw 0.7vh 0.5vw;
     margin-top: 2vh;
 `
+
+export const SelectStyled = styled.select`
+    height: 100%;
+    width: 52.5vw;
+    border: none;
+    font-size: 1vw;
+    font-weight: 500;
+`
