@@ -8,6 +8,7 @@ export const CardProposta = ({ cuidadosIdoso, nomeIdoso, idadeIdoso, nomeRespons
             <S.TxtInfo><b>Idade:</b> {idadeIdoso} anos</S.TxtInfo>
             <S.TxtInfo>{cuidadosIdoso}</S.TxtInfo>
             <S.Linha>‎ </S.Linha>
+            <S.TxtInfo>Caso interesse, entrar em contato</S.TxtInfo>
             <S.TxtInfo><b>Responsável:</b> {nomeResponsavel}</S.TxtInfo>
             <S.TxtInfo><b>Telefone responsável:</b> {telefoneResponsavel}</S.TxtInfo>
             <S.TxtInfo><b>E-mail de contato:</b> {email}</S.TxtInfo>

@@ -17,7 +17,7 @@ export function InicioIdoso() {
             try {
                 const response = await axiosInstance.get('/caregiver/getAvailable');
                 setCuidadoresData(response.data);
-                setCuidadoresFiltrados(response.data); // Initializing filtered data with fetched data
+                setCuidadoresFiltrados(response.data);
             } catch (error) {
                 console.error('Failed to fetch caregivers:', error);
             }

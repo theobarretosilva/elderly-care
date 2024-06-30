@@ -1,26 +1,44 @@
 import { useLocation } from 'react-router';
-import * as S from './DescricaoCuidadorIdoso.styles'
-import emaisjs from '@emailjs/browser'
-import toast from 'react-hot-toast';
+import * as S from './DescricaoCuidadorIdoso.styles';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../lib/axios';
+import { CardIdoso } from '../../components/CardIdoso/CardIdoso';
 
 export function DescricaoCuidadorIdoso() {
     const location = useLocation();
     const [user, setUser] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [idosos, setIdosos] = useState([]);
+
+    useEffect(() => {
+        const fetchIdosos = async () => {
+            try {
+                const token = localStorage.getItem('ElderlyCareToken');
+
+                const response = await axiosInstance.get('/patients/myElder', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setIdosos(response.data);
+            } catch (error) {
+                console.error('Failed to fetch elders:', error);
+            }
+        };
+
+        fetchIdosos();
+    }, []);
 
     useEffect(() => {
         const fetchPerfil = async () => {
             try {
-                // Supondo que você tenha o token armazenado em algum lugar, como o localStorage ou um state
-                const token = localStorage.getItem('ElderlyCareToken'); // ou obtenha de onde você armazena o token
+                const token = localStorage.getItem('ElderlyCareToken');
 
                 const response = await axiosInstance.get('/patients/profile', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response)
                 setUser(response.data);
             } catch (error) {
                 console.error('Failed to fetch profile:', error);
@@ -32,54 +50,39 @@ export function DescricaoCuidadorIdoso() {
 
     const { cuidador } = location.state || {};
 
-    console.log(cuidador)
-    console.log(user);
+    if (!user) {
+        return <div>...aguarde</div>;
+    }
 
-    const templateParams = {
-        // from_name: user.name,
-        // to_name: cuidador.name,
-        // message: "Olá! Me interessei pelo seu perfil! Por favor, entre em contato comigo por meio dos contatos abaixo:",
-        // email: user.email,
-        // phone: user.phone,
-    };
-
-    const sendEmail = (e) => {
-        e.preventDefault();
-
-        emaisjs.send('service_j8q9d8l', 'template_vw3a6z7',  templateParams, 'R7xmXxa_lmNKUIlNW')
-        .then((response) => {
-            toast.success('Email de contato enviado com sucesso!', {
-                duration: 4000,
-                position: 'top-center',
-            });
-
-            console.log(response)
-        }, (err) => {
-            toast.error('Não foi possivel enviar o email de contato! Tente novamente mais tarde!', {
-                duration: 4000,
-                position: 'top-center',
-            });
-
-            console.log(err)
-        })
-    };
-
-    return(
-        <S.MainStyled>
-            <S.BoxFundo>
-                <S.DivDados>
-                    <S.FotoCuidador src={cuidador.photo} />
-                    <div>
-                        <S.TxtNome>{cuidador.name}</S.TxtNome>
-                        <S.TxtInfo>Idade: {cuidador.date_birth} anos</S.TxtInfo>
-                        <S.TxtInfo>Experiência: {cuidador.experience}</S.TxtInfo>
-                        <S.TxtInfo>Formado(a) faz: {cuidador.training_time}</S.TxtInfo>
-                    </div>
-                </S.DivDados>
-                <S.Linha />
-                <S.TxtDescricao>{cuidador.description_experience}</S.TxtDescricao>
-                <S.BtnContato onClick={sendEmail}>Entrar em contato</S.BtnContato>
-            </S.BoxFundo>
-        </S.MainStyled>
-    )
+    return (
+        <>
+            <S.MainStyled>
+                <S.BoxFundo>
+                    <S.DivDados>
+                        <S.FotoCuidador src={cuidador.photo} />
+                        <div>
+                            <S.TxtNome>{cuidador.name}</S.TxtNome>
+                            <S.TxtInfo>Idade: {cuidador.date_birth} anos</S.TxtInfo>
+                            <S.TxtInfo>Experiência: {cuidador.experience}</S.TxtInfo>
+                            <S.TxtInfo>Formado(a) faz: {cuidador.training_time}</S.TxtInfo>
+                        </div>
+                    </S.DivDados>
+                    <S.Linha />
+                    <S.TxtDescricao>{cuidador.description_experience}</S.TxtDescricao>
+                    <S.BtnContato onClick={() => setIsModalOpen(true)}>Enviar proposta</S.BtnContato>
+                </S.BoxFundo>
+            </S.MainStyled>
+            {isModalOpen && (
+                <S.FundoModal onClick={() => setIsModalOpen(false)}>
+                    {idosos.map((idoso) => (
+                        <CardIdoso
+                            key={idoso.id_elder}
+                            idoso={idoso}
+                            cuidador={cuidador}
+                        />
+                    ))}
+                </S.FundoModal>
+            )}
+        </>
+    );
 }
