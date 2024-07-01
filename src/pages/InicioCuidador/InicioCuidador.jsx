@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { CardProposta } from '../../components/CardProposta/CardProposta'
 import * as S from './InicioCuidador.styles'
 import { axiosInstance } from '../../lib/axios'
+import { CardProposta } from '../../components/CardProposta/CardProposta'
 
 export function InicioCuidador() {
     const [propostas, setPropostas] = useState([]);
@@ -33,12 +33,12 @@ export function InicioCuidador() {
             <S.DivCards>
                 {propostas.map((proposta) => {
                     <CardProposta
-                        nomeIdoso=""
-                        idadeIdoso={88}
-                        cuidadosIdoso="ele precisa de muita ajuda no banho, para comer, deambular, não ouve de um ouvido e é paraplégico"
-                        nomeResponsavel="Maurício Meireles"
-                        telefoneResponsavel="(48) 99122-7701"
-                        email="barretotheo25@gmail.com"
+                        nomeIdoso={proposta.elder_id.name}
+                        idadeIdoso={proposta.elder_id.date_birth}
+                        cuidadosIdoso={proposta.elder_id.ministration}
+                        nomeResponsavel={proposta.elder_id.responsible_id.name}
+                        telefoneResponsavel={proposta.elder_id.responsible_id.phone}
+                        email={proposta.elder_id.responsible_id.email}
                     />  
                 })}
             </S.DivCards>

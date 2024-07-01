@@ -23,7 +23,7 @@ export const CardProposta = ({ cuidadosIdoso, nomeIdoso, idadeIdoso, nomeRespons
 CardProposta.propTypes = {
     cuidadosIdoso: PropTypes.string.isRequired,
     nomeIdoso: PropTypes.string.isRequired,
-    idadeIdoso: PropTypes.number.isRequired,
+    idadeIdoso: PropTypes.string.isRequired,
     nomeResponsavel: PropTypes.string.isRequired,
     telefoneResponsavel: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired
