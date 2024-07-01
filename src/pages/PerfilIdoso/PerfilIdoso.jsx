@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router'
 import * as S from './PerfilIdoso.styles'
-// import { useGetIdoso } from '../../hooks/useGetIdoso'
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../lib/axios';
 
@@ -12,8 +11,7 @@ export function PerfilIdoso() {
     useEffect(() => {
         const fetchPerfil = async () => {
             try {
-                // Supondo que você tenha o token armazenado em algum lugar, como o localStorage ou um state
-                const token = localStorage.getItem('ElderlyCareToken'); // ou obtenha de onde você armazena o token
+                const token = localStorage.getItem('ElderlyCareToken');
 
                 const response = await axiosInstance.get('/patients/profile', {
                     headers: {
@@ -21,7 +19,7 @@ export function PerfilIdoso() {
                     }
                 });
                 setResponsavel(response.data);
-                localStorage.setItem("Responsavel", JSON.stringify(response.data)); // Salva os dados como JSON string
+                localStorage.setItem("Responsavel", JSON.stringify(response.data));
 
                 setIdosos(response.data.elder_id)
                 localStorage.setItem("Idoso", JSON.stringify(response.data.elder_id))
@@ -32,9 +30,13 @@ export function PerfilIdoso() {
 
         fetchPerfil();
     }, []);
-
+    
     if (!responsavel || !idosos) {
-        return <div>Loading...</div>; // Exibe um carregando enquanto os dados não são carregados
+        return (
+            <S.MainStyled>
+                <S.ImgLoading src='../../src/assets/svg/loading.svg' />
+            </S.MainStyled>
+        )
     }
 
     return(

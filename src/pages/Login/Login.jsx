@@ -5,9 +5,7 @@ import eyeIcon from '../../assets/svg/eye.svg';
 import eyeClosedIcon from '../../assets/svg/eye_closed.svg';
 import mailIcon from '../../assets/svg/mail.svg';
 import { useNavigate } from 'react-router';
-import { CircularProgress, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
-import { useLogin } from '../../hooks/useLogin';
-import { ErrorText } from '../../components/ErrorText/ErrorText';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import toast, { Toaster } from 'react-hot-toast';
 import { axiosInstance } from '../../lib/axios';
 
@@ -55,14 +53,6 @@ export function Login() {
         setValue((event.target).value);
     };
 
-    const { isLoading, errors, register, responseError } = useLogin(value)
-
-    const LoginButtonLabel = isLoading ? (
-        <CircularProgress size="1.5rem" color="inherit" />
-    ) : (
-        'Entrar'
-    );
-
     return(
         <S.MainStyled>
             <S.LogoStyled src={logoCompleta} />
@@ -104,8 +94,7 @@ export function Login() {
                             <FormControlLabel onChange={() => setUsuario('Cuidador')} value="caregiver" control={<Radio />} label="Cuidador" />
                         </RadioGroup>
                     </FormControl>
-                    <S.BtnEntrar>{LoginButtonLabel}</S.BtnEntrar>
-                    {!!responseError && <ErrorText>{responseError}</ErrorText>}
+                    <S.BtnEntrar>Entrar</S.BtnEntrar>
                     <S.PCriarConta>Não tem uma conta? 
                         <span onClick={() => navigate('/escolhaCadastro')} style={{color: '#0077B6', cursor: 'pointer'}}>
                             ‎ Registre-se

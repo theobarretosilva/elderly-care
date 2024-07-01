@@ -29,7 +29,11 @@ export function PerfilCuidador() {
     }, [])
 
     if (!cuidador) {
-        return <div>Loading...</div>; // Exibe um carregando enquanto os dados não são carregados
+        return (
+            <S.MainStyled>
+                <S.ImgLoading src='../../src/assets/svg/loading.svg' />
+            </S.MainStyled>
+        )
     }
 
     return(

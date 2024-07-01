@@ -61,20 +61,20 @@ export function DescricaoCuidadorIdoso() {
     return (
         <>
             <S.MainStyled>
-                 <S.BoxFundo>
-                     <S.DivDados>
-                         <S.FotoCuidador src={cuidador.photo} />
-                         <div>
-                             <S.TxtNome>{cuidador.name}</S.TxtNome>
-                             <S.TxtInfo>Idade: {cuidador.date_birth} anos</S.TxtInfo>
-                             <S.TxtInfo>Experiência: {cuidador.experience}</S.TxtInfo>
-                             <S.TxtInfo>Formado(a) faz: {cuidador.training_time}</S.TxtInfo>
-                         </div>
-                     </S.DivDados>
-                     <S.Linha />
-                     <S.TxtDescricao>{cuidador.description_experience}</S.TxtDescricao>
-                     <S.BtnContato onClick={() => setIsModalOpen(true)}>Enviar proposta</S.BtnContato>
-                 </S.BoxFundo>
+                <S.BoxFundo>
+                    <S.DivDados>
+                        <S.FotoCuidador src={cuidador.photo} />
+                        <div>
+                            <S.TxtNome>{cuidador.name}</S.TxtNome>
+                            <S.TxtInfo>Idade: {cuidador.date_birth} anos</S.TxtInfo>
+                            <S.TxtInfo>Experiência: {cuidador.experience}</S.TxtInfo>
+                            <S.TxtInfo>Formado(a) faz: {cuidador.training_time}</S.TxtInfo>
+                        </div>
+                    </S.DivDados>
+                    <S.Linha />
+                    <S.TxtDescricao>{cuidador.description_experience}</S.TxtDescricao>
+                    <S.BtnContato onClick={() => setIsModalOpen(true)}>Enviar proposta</S.BtnContato>
+                </S.BoxFundo>
             </S.MainStyled>
              {isModalOpen && (
                 <S.FundoModal onClick={() => setIsModalOpen(false)}>

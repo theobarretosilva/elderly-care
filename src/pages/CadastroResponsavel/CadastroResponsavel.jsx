@@ -12,12 +12,10 @@ import ReactInputMask from 'react-input-mask';
 import { estados } from '../../lib/states'
 
 export function CadastroResponsavel() {
-
     const navigate = useNavigate();
-    const { setValue, submit, responseError } = useCreateAccountResponsavel();
-
     const [visible, setVisible] = useState(false);
-
+    const { setValue, submit, responseError } = useCreateAccountResponsavel();
+    
     return(
         <>
             <S.DivVoltar onClick={() => navigate('/escolhaCadastro')}>

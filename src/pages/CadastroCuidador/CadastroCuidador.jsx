@@ -13,9 +13,8 @@ import { estados } from '../../lib/states';
 
 export function CadastroCuidador() {
     const navigate = useNavigate();
-    const { setValue, submit, responseError } = useCreateAccountCuidador();
-
     const [visible, setVisible] = useState(false);
+    const { setValue, submit, responseError } = useCreateAccountCuidador();
     
     return (
         <>

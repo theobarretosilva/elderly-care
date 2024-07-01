@@ -4,6 +4,7 @@ import { estados } from '../../lib/states';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { axiosInstance } from '../../lib/axios';
+import toast from 'react-hot-toast';
 
 export function EditarDadosIdoso() {
     const [id_elder, setId_elder] = useState();
@@ -55,11 +56,14 @@ export function EditarDadosIdoso() {
                 complement
             }
         };
-        const response = await axiosInstance.put('patients/update/elder', updatedIdoso, {
+        await axiosInstance.put('patients/update/elder', updatedIdoso, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        });
+        })
+        .then((response) => {
+            toast.success("Alterado com sucesso!")
+        })
     }
 
     return(
@@ -131,7 +135,6 @@ export function EditarDadosIdoso() {
                     </S.DivInput>
                     <S.DivInput>
                         <S.SelectStyled
-                            required
                             onChange={(e) => setState(e.target.value)}
                             value={state}
                         >

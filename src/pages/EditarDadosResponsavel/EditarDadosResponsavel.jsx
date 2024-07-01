@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { axiosInstance } from '../../lib/axios';
 import { estados } from '../../lib/states';
 import ReactInputMask from 'react-input-mask';
+import toast from 'react-hot-toast';
 
 export const EditarDadosResponsavel = () => {
     const [email, setEmail] = useState();
@@ -52,11 +53,14 @@ export const EditarDadosResponsavel = () => {
             }
         };
 
-        const response = await axiosInstance.put('patients/update/responsible', updatedResponsavel, {
+        await axiosInstance.put('patients/update/responsible', updatedResponsavel, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        });
+        })
+        .then((response) => {
+            toast.success("Alterado com sucesso!")
+        })
     }
 
     return(
@@ -146,7 +150,6 @@ export const EditarDadosResponsavel = () => {
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                         <S.DivInput style={{width: '48%'}}>
                             <S.SelectStyled
-                                required
                                 onChange={(e) => setState(e.target.value)}
                                 value={state}
                             >

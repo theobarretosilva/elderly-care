@@ -19,7 +19,7 @@ export const CardProposta = ({ cuidadosIdoso, nomeIdoso, idadeIdoso, nomeRespons
                     Authorization: `Bearer ${token}`
                 }
             });
-            setStatus(novoStatus); // Atualiza o estado apenas após o sucesso da requisição
+            setStatus(novoStatus);
         } catch (error) {
             window.alert("Não foi possível atualizar a proposta", error);
         }

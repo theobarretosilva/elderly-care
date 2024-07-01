@@ -48,7 +48,6 @@ export const useCreateAccountResponsavel = () => {
         e.preventDefault();
     
         try {
-            // Mostrar notificação de carregamento
             axiosInstance.post('/patients/signup/responsible', payload)
             .then((response) => {
                 toast.success('Responsável criado com sucesso! Seguindo para cadastro do idoso.')
@@ -56,11 +55,8 @@ export const useCreateAccountResponsavel = () => {
             })
 
         } catch (error) {
-            // Captura e exibe o erro se a promise falhar
+            window.alert(error)
             setResponseError('Houve um erro, tente novamente mais tarde.');
-                // if (response.statusText === "Conflict") {
-                //     return toast.error('Já existe um usuário com o mesmo CPF/Email cadastrado!');
-                // }
         }
     };
     

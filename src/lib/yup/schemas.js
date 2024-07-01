@@ -30,8 +30,8 @@ export const schemas = {
     responsavelForm: yup.object().shape({
         name: validators.requiredString,
         cpf: validators.cpf,
-        // photoLink: validators.requiredString,
-        // date_birth: validators.dataNascimento,
+        photoLink: validators.requiredString,
+        date_birth: validators.dataNascimento,
         address: yup.object().shape({
             cep: validators.cep,
             street: validators.requiredString,

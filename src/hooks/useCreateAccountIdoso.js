@@ -1,7 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { schemas } from "../lib/yup/schemas";
 import { useNavigate } from "react-router";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
@@ -20,34 +17,6 @@ export const useCreateAccountIdoso = () => {
     const [complement, setComplement] = useState();
     const [ministration, setMinistration] = useState();
     const [historic, setHistoric] = useState();
-
-    const defaultValues = {
-        name: '',
-        cpf: '',
-        date_birth: '',
-        // photo: '',
-        address: {
-            cep: '',
-            street: '',
-            number: '',
-            district: '',
-            city: '',
-            state: '',
-            complement: '',
-        },
-        ministration: '',
-        historic: ''
-    };
-
-    const [responseError, setResponseError] = useState('')
-
-    const {
-        register,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schemas.idosoForm),
-        defaultValues,
-    })
 
     const payload = {
         name,
@@ -73,7 +42,6 @@ export const useCreateAccountIdoso = () => {
         e.preventDefault();
     
         try {
-            // Mostrar notificação de carregamento
             axiosInstance.post('/patients/signup/elder', payload)
             .then((response) => {
                 toast.success('Idoso cadastrado com sucesso! Redirecionando para o início')
@@ -81,11 +49,7 @@ export const useCreateAccountIdoso = () => {
             })
 
         } catch (error) {
-            // Captura e exibe o erro se a promise falhar
-            setResponseError('Houve um erro, tente novamente mais tarde.');
-                // if (response.statusText === "Conflict") {
-                //     return toast.error('Já existe um usuário com o mesmo CPF/Email cadastrado!');
-                // }
+            window.alert(error)
         }
     };
 
@@ -106,8 +70,5 @@ export const useCreateAccountIdoso = () => {
             setHistoric
         },
         submit,
-        register,
-        errors,
-        responseError
     }
 }
