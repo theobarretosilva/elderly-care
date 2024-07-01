@@ -84,3 +84,7 @@ export const FundoModal = styled.div`
     z-index: 1000;
 `;
 
+export const ImgLoading = styled.img`
+    width: 35vw;
+    height: 70vh;
+`

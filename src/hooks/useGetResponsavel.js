@@ -11,7 +11,6 @@ export const useGetResponsavel = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log(response.data)
         } catch (error) {
             console.error('Failed to fetch profile:', error);
         }

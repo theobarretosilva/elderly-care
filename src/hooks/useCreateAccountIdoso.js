@@ -81,7 +81,6 @@ export const useCreateAccountIdoso = () => {
             })
 
         } catch (error) {
-            console.log(error)
             // Captura e exibe o erro se a promise falhar
             setResponseError('Houve um erro, tente novamente mais tarde.');
                 // if (response.statusText === "Conflict") {

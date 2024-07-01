@@ -63,7 +63,6 @@ export const EditarDadosCuidador = () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response);
     }
 
     return(

@@ -18,7 +18,6 @@ export function PerfilCuidador() {
                     }
                 });
 
-                console.log(response);
                 setCuidador(response.data);
                 localStorage.setItem("Cuidador", JSON.stringify(response.data));
             } catch (error) {

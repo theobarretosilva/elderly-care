@@ -66,3 +66,11 @@ export const BtnRecusa = styled.button`
     margin-top: 1vh;
     cursor: pointer;
 `
+
+export const TxtPropAceita = styled.p`
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: green;
+    text-align: center;
+    padding-top: 1vh;
+`

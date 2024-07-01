@@ -17,9 +17,8 @@ export function InicioCuidador() {
                     }
                 });
                 setPropostas(response.data);
-                console.log(response.data)
             } catch (error) {
-                console.log("Não foi possível recuperar suas propostas", error)
+                window.alert(error)
             }
         };
 
@@ -31,16 +30,18 @@ export function InicioCuidador() {
             <S.TxtInicial>Propostas feitas para você</S.TxtInicial>
             <S.Linha />
             <S.DivCards>
-                {propostas.map((proposta) => {
+                {propostas.map((proposta) => (
                     <CardProposta
+                        key={proposta.id_proposal}
                         nomeIdoso={proposta.elder_id.name}
                         idadeIdoso={proposta.elder_id.date_birth}
                         cuidadosIdoso={proposta.elder_id.ministration}
                         nomeResponsavel={proposta.elder_id.responsible_id.name}
                         telefoneResponsavel={proposta.elder_id.responsible_id.phone}
                         email={proposta.elder_id.responsible_id.email}
-                    />  
-                })}
+                        proposta={proposta}
+                    />
+                ))}
             </S.DivCards>
         </S.MainStyled>
     )

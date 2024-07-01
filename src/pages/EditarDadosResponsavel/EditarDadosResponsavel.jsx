@@ -19,7 +19,6 @@ export const EditarDadosResponsavel = () => {
 
     useEffect(() => {
         const responsavel = JSON.parse(localStorage.getItem("Responsavel"));
-    console.log(responsavel);
         if (responsavel) {
             setEmail(responsavel.email);
             setKinship(responsavel.kinship);
@@ -58,7 +57,6 @@ export const EditarDadosResponsavel = () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response);
     }
 
     return(

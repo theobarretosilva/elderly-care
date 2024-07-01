@@ -20,7 +20,6 @@ export function EditarDadosIdoso() {
 
     useEffect(() => {
         const idoso = JSON.parse(localStorage.getItem("Idoso"));
-        console.log(idoso[0])
 
         if (idoso) {
             setId_elder(idoso[0].id_elder);
@@ -61,7 +60,6 @@ export function EditarDadosIdoso() {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response);
     }
 
     return(

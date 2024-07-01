@@ -34,7 +34,6 @@ export const useLogin = (value) => {
         `${value}/signin`,
         data
       )
-      console.log(responseData)
       return responseData
     },
     onSuccess: handleLoginSuccess,

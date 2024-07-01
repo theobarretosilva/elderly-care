@@ -3,7 +3,6 @@ import { axiosInstance } from '../../lib/axios';
 import PropTypes from 'prop-types';
 
 export const CardIdoso = ({ idoso, cuidador }) => {
-    console.log(cuidador)
     const payload = {
         caregiver_id: cuidador.id_caregiver,
         elder_id: idoso.id_elder
@@ -19,7 +18,6 @@ export const CardIdoso = ({ idoso, cuidador }) => {
                 }
             });
 
-            console.log(response);
         } catch (error) {
             console.error('Failed to send proposal:', error);
         }

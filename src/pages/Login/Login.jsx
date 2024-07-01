@@ -28,7 +28,6 @@ export function Login() {
                 `${value}/signin`,
                 payload
             );
-            console.log(data)
 
             if (data.token) {
                 localStorage.setItem('ElderlyCareToken', data.token);
@@ -44,7 +43,7 @@ export function Login() {
                 })
             }
         } catch (error) {
-            console.log("Não foi possível fazer login", error)
+            window.alert("Não foi possível fazer login", error)
         }
         
     }
