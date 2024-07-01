@@ -70,3 +70,8 @@ export const BtnEditar = styled.button`
     margin-top: 5vh;
     cursor: pointer;
 `
+
+export const ImgLoading = styled.img`
+    width: 35vw;
+    height: 70vh;
+`

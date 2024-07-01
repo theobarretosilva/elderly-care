@@ -62,6 +62,7 @@ export function EditarDadosIdoso() {
             }
         })
         .then((response) => {
+            console.log(response)
             toast.success("Alterado com sucesso!")
         })
     }
